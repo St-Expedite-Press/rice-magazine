@@ -586,13 +586,24 @@ body.splash::before {
 }
 
 @media (max-width: 520px) {
+  .masthead {
+    padding-inline: 1rem;
+  }
+
   .masthead-inner {
     width: 100%;
     justify-content: space-between;
   }
 
   .main-nav ul {
-    gap: 0.35rem 0.9rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem 0.6rem;
+  }
+
+  .main-nav a {
+    font-size: 0.72rem;
+    letter-spacing: 0.055em;
   }
 
   .toc-entry {
