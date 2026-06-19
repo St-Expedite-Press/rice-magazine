@@ -7,6 +7,8 @@
   --page-margin: clamp(1rem, 5vw, 5rem);
   --content-width: 70ch;
   --transition: 160ms ease;
+  --acid: #d9ff00;
+  --black: #090909;
 }
 
 * {
@@ -28,6 +30,7 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   position: relative;
+  overflow-x: clip;
 }
 
 body::before {
@@ -727,5 +730,860 @@ body.splash::before {
 
   .splash-video {
     display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Volume 1 editorial system */
+
+.masthead-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+  font: 700 0.68rem/1 "Courier New", monospace;
+  letter-spacing: 0.08em;
+}
+
+.issue-switcher,
+.search-trigger {
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.issue-switcher:hover,
+.search-trigger:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.search-dialog {
+  width: min(780px, calc(100vw - 2rem));
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.search-dialog::backdrop,
+.image-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.search-shell {
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.search-heading {
+  display: flex;
+  justify-content: space-between;
+  font: 700 0.72rem/1 "Courier New", monospace;
+  letter-spacing: 0.1em;
+}
+
+.search-heading button {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+#site-search {
+  width: 100%;
+  margin: 1.5rem 0;
+  padding: 0.6rem 0;
+  border: 0;
+  border-bottom: 3px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: 900 clamp(1.4rem, 5vw, 3.5rem)/1 "Arial Black", Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.search-result {
+  position: relative;
+  display: grid;
+  grid-template-columns: 6rem 1fr auto;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--rule);
+  text-decoration: none;
+}
+
+.search-result span,
+.search-result small,
+.empty-state {
+  font: 0.7rem/1.4 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.search-result:hover {
+  background: var(--acid);
+}
+
+.section-shell {
+  margin: 0 var(--page-margin) 4rem;
+}
+
+.section-hero {
+  position: relative;
+  min-height: clamp(260px, 42vw, 560px);
+  padding: clamp(1rem, 3vw, 2rem) 0;
+  border-bottom: 2px solid var(--ink);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.8fr minmax(220px, 0.65fr);
+  align-items: end;
+  gap: 2rem;
+}
+
+.section-hero > *,
+.article-header.editorial > * {
+  min-width: 0;
+}
+
+.section-hero h1 {
+  margin: 0 0 -0.08em -0.07em;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: clamp(5rem, 16vw, 13rem);
+  line-height: 0.72;
+  letter-spacing: -0.09em;
+  text-transform: uppercase;
+}
+
+.section-hero-copy {
+  padding-bottom: 0.5rem;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  line-height: 1.45;
+}
+
+.section-hero-copy::before {
+  content: attr(data-code);
+  display: block;
+  margin-bottom: 1rem;
+  padding-top: 0.45rem;
+  border-top: 7px solid var(--acid);
+  font: 700 0.7rem/1.2 "Courier New", monospace;
+  letter-spacing: 0.1em;
+}
+
+.section-index {
+  counter-reset: section-entry;
+}
+
+.section-record {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1.5fr) minmax(12rem, 0.75fr);
+  gap: clamp(1rem, 3vw, 3rem);
+  padding: clamp(1.25rem, 3vw, 2.5rem) 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.section-record::before {
+  counter-increment: section-entry;
+  content: "0" counter(section-entry);
+  font: 700 0.75rem/1 "Courier New", monospace;
+}
+
+.section-record h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.section-record h2 a {
+  text-decoration: none;
+}
+
+.section-record h2 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.record-meta {
+  align-self: end;
+  color: var(--muted);
+  font: 0.72rem/1.5 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.record-excerpt {
+  margin: 0.8rem 0 0;
+  max-width: 44ch;
+}
+
+.section-record:hover {
+  background: linear-gradient(90deg, transparent 0 4%, var(--acid) 4% 100%);
+}
+
+.article-header.editorial {
+  width: auto;
+  margin: clamp(2rem, 6vw, 6rem) var(--page-margin);
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.6fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+}
+
+.article-header.editorial h1 {
+  max-width: 11ch;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  letter-spacing: -0.08em;
+  line-height: 0.78;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.article-side {
+  padding-top: 1rem;
+  border-top: 8px solid var(--acid);
+}
+
+.article-side .deck {
+  font-size: clamp(1.2rem, 2.3vw, 1.7rem);
+}
+
+.article-layout {
+  width: min(1180px, calc(100% - (2 * var(--page-margin))));
+  margin: 0 auto 5rem;
+  display: grid;
+  grid-template-columns: minmax(130px, 0.35fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.margin-rail {
+  position: sticky;
+  top: 2rem;
+  display: grid;
+  gap: 2rem;
+  color: var(--muted);
+  font: 0.68rem/1.45 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.margin-note {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--ink);
+}
+
+.article-layout .article-body {
+  width: min(66ch, 100%);
+  margin: 0;
+}
+
+.article-body > p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.1em 0 0;
+  font: 900 5.5rem/0.72 "Arial Black", Arial, sans-serif;
+}
+
+.pull-quote {
+  width: min(90vw, 900px);
+  margin: 3rem 0 3rem clamp(-10rem, -10vw, -3rem);
+  padding: 1.5rem 0;
+  border-block: 2px solid var(--ink);
+  font-size: clamp(2rem, 5vw, 4.8rem);
+  font-style: italic;
+  line-height: 0.98;
+}
+
+.article-figure {
+  margin: 3rem 0;
+}
+
+.article-figure img {
+  display: block;
+  width: min(1000px, 85vw);
+  max-width: none;
+  margin-left: clamp(-8rem, -8vw, -2rem);
+  filter: grayscale(100%) contrast(1.1);
+}
+
+.article-figure figcaption {
+  margin-top: 0.65rem;
+  font: 0.68rem/1.45 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.reading-toolbar {
+  width: min(1180px, calc(100% - (2 * var(--page-margin))));
+  margin: 0 auto 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reading-toolbar button,
+.archive-filters button,
+.text-action {
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: 700 0.68rem/1 "Courier New", monospace;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.reading-toolbar button:hover,
+.archive-filters button:hover,
+.archive-filters button[aria-pressed="true"],
+.text-action:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.article-pagination {
+  margin: 4rem var(--page-margin);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-block: 1px solid var(--ink);
+}
+
+.article-pagination a {
+  padding: clamp(1rem, 4vw, 3rem);
+  text-decoration: none;
+}
+
+.article-pagination a + a {
+  border-left: 1px solid var(--ink);
+  text-align: right;
+}
+
+.article-pagination span {
+  display: block;
+  font: 0.65rem/1 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.article-pagination strong {
+  font-size: clamp(1.3rem, 3vw, 2.8rem);
+}
+
+.poem-stage {
+  min-height: 70vh;
+  padding: clamp(2rem, 7vw, 7rem) var(--page-margin);
+  display: grid;
+  grid-template-columns: 0.55fr minmax(0, 1fr) 0.45fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.poem-stage header {
+  position: sticky;
+  top: 2rem;
+}
+
+.poem-stage .poem-title {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.82;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.poem-stage .poem-body {
+  margin: clamp(2rem, 8vw, 7rem) 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+.poem-folio {
+  padding-top: 0.6rem;
+  border-top: 7px solid var(--acid);
+  font: 0.68rem/1.5 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.archive-toolbar {
+  margin: 2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.archive-card {
+  position: relative;
+  grid-column: span 4;
+  min-height: 320px;
+  border: 1px solid var(--ink);
+  background: #e9e7e0;
+  overflow: hidden;
+}
+
+.archive-card.wide {
+  grid-column: span 8;
+}
+
+.archive-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.15);
+  transition: filter 250ms ease, transform 450ms ease;
+}
+
+.archive-card:hover img {
+  filter: grayscale(20%) contrast(1.1);
+  transform: scale(1.02);
+}
+
+.archive-label {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 0.75rem;
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+  font: 0.68rem/1.45 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.archive-label strong {
+  display: block;
+  font-size: 0.85rem;
+}
+
+.archive-record {
+  margin: clamp(2rem, 5vw, 5rem) var(--page-margin);
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.5fr);
+  gap: clamp(1rem, 4vw, 4rem);
+}
+
+.archive-scan {
+  position: relative;
+}
+
+.archive-scan img {
+  width: 100%;
+  border: 1px solid var(--ink);
+  filter: grayscale(100%) contrast(1.08);
+}
+
+.archive-scan button {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+}
+
+.archive-data {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+}
+
+.field-card {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.field-card dt,
+.field-card dd {
+  margin: 0;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--ink);
+}
+
+.field-card dt {
+  padding-right: 0.5rem;
+}
+
+.image-dialog {
+  width: min(1200px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 2.5rem 1rem 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper);
+}
+
+.image-dialog button {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.7rem;
+  border: 0;
+  background: transparent;
+  font: 700 0.7rem/1 "Courier New", monospace;
+  cursor: pointer;
+}
+
+.image-dialog img {
+  display: block;
+  max-height: calc(100vh - 5rem);
+  margin: auto;
+}
+
+.manifesto {
+  margin: clamp(2rem, 6vw, 6rem) var(--page-margin);
+}
+
+.manifesto-lead {
+  max-width: 15ch;
+  margin: 0 0 5rem;
+  font-size: clamp(3rem, 9vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 2px solid var(--ink);
+}
+
+.proposition {
+  min-height: 280px;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.proposition:nth-child(even) {
+  border-right: 0;
+}
+
+.proposition span {
+  font: 700 0.7rem/1 "Courier New", monospace;
+}
+
+.proposition h2 {
+  max-width: 14ch;
+  font-size: clamp(1.8rem, 4vw, 3.8rem);
+  line-height: 1;
+}
+
+.colophon-grid,
+.submission-grid,
+.shop-specimen {
+  margin: 4rem var(--page-margin);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.colophon-panel {
+  grid-column: span 4;
+  padding: 1rem;
+  border-top: 7px solid var(--acid);
+  font: 0.75rem/1.55 "Courier New", monospace;
+}
+
+.submission-status {
+  grid-column: span 5;
+  min-width: 0;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 2px solid var(--ink);
+  background: var(--acid);
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.status-stamp {
+  display: inline-block;
+  padding: 0.4rem 0.6rem;
+  border: 2px solid var(--ink);
+  font: 900 clamp(1.4rem, 3vw, 2.5rem)/1 "Arial Black", Arial, sans-serif;
+  transform: rotate(-2deg);
+}
+
+.submission-data {
+  grid-column: span 7;
+}
+
+.submission-data dl {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  margin: 0;
+}
+
+.submission-data dt,
+.submission-data dd {
+  margin: 0;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--ink);
+  font: 0.75rem/1.45 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.submission-copy {
+  grid-column: 3 / span 8;
+  margin-top: 3rem;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+
+.shop-image {
+  grid-column: span 7;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.shop-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--ink);
+  filter: grayscale(75%) contrast(1.08);
+}
+
+.shop-data {
+  grid-column: span 5;
+  align-self: end;
+}
+
+.shop-data h1 {
+  margin: 0;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 0.75;
+  letter-spacing: -0.08em;
+}
+
+.edition-ledger {
+  margin: 2rem 0;
+  font: 0.75rem/1.5 "Courier New", monospace;
+}
+
+.edition-ledger div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--ink);
+}
+
+.signup-form {
+  margin-top: 1.5rem;
+}
+
+.signup-form-row {
+  display: flex;
+}
+
+.signup-form input,
+.signup-form button {
+  min-height: 2.75rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  font: 0.7rem/1 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.signup-form input {
+  min-width: 0;
+  flex: 1;
+  padding: 0.7rem;
+  background: transparent;
+}
+
+.signup-form button {
+  padding: 0.7rem 1rem;
+  background: var(--ink);
+  color: white;
+  cursor: pointer;
+}
+
+.form-status {
+  min-height: 1.5em;
+  font: 0.62rem/1.4 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+body.reading-mode .masthead,
+body.reading-mode .footer,
+body.reading-mode .coords-left,
+body.reading-mode .coords-right,
+body.reading-mode .article-header,
+body.reading-mode .reading-toolbar,
+body.reading-mode .margin-rail,
+body.reading-mode .article-pagination,
+body.reading-mode .poem-stage > :not(.poem-body) {
+  display: none;
+}
+
+body.reading-mode .article-layout,
+body.reading-mode .poem-stage {
+  display: block;
+  width: min(68ch, calc(100% - 2rem));
+  margin: 3rem auto;
+  padding: 0;
+}
+
+body.reading-mode .article-body,
+body.reading-mode .poem-body {
+  width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .masthead-tools {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .section-hero,
+  .article-header.editorial,
+  .article-layout,
+  .archive-record {
+    grid-template-columns: 1fr;
+  }
+
+  .section-hero {
+    align-items: end;
+  }
+
+  .section-record {
+    grid-template-columns: 3rem 1fr;
+  }
+
+  .record-meta {
+    grid-column: 2;
+  }
+
+  .margin-rail,
+  .archive-data {
+    position: static;
+  }
+
+  .article-layout .margin-rail {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pull-quote,
+  .article-figure img {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .poem-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .poem-stage header {
+    position: static;
+  }
+
+  .poem-stage .poem-title {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  .archive-card,
+  .archive-card.wide {
+    grid-column: span 6;
+  }
+
+  .submission-status,
+  .submission-data,
+  .shop-image,
+  .shop-data {
+    grid-column: 1 / -1;
+  }
+
+  .submission-copy {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 580px) {
+  .search-result {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .section-hero {
+    min-height: 360px;
+  }
+
+  .section-hero h1 {
+    font-size: clamp(3.8rem, 15vw, 5.5rem);
+    letter-spacing: -0.075em;
+  }
+
+  .article-header.editorial h1 {
+    font-size: clamp(2.9rem, 12vw, 4.2rem);
+    line-height: 0.82;
+    overflow-wrap: normal;
+  }
+
+  .reading-toolbar {
+    justify-content: flex-start;
+  }
+
+  .section-record {
+    grid-template-columns: 2rem 1fr;
+  }
+
+  .article-layout .margin-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .article-pagination {
+    grid-template-columns: 1fr;
+  }
+
+  .article-pagination a + a {
+    border-top: 1px solid var(--ink);
+    border-left: 0;
+  }
+
+  .archive-card,
+  .archive-card.wide {
+    grid-column: 1 / -1;
+  }
+
+  .manifesto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proposition,
+  .proposition:nth-child(even) {
+    border-right: 0;
+  }
+
+  .colophon-panel {
+    grid-column: 1 / -1;
+  }
+
+  .submission-grid,
+  .shop-specimen,
+  .colophon-grid {
+    display: block;
+    margin-inline: 1rem;
+  }
+
+  .submission-status,
+  .submission-data,
+  .submission-copy,
+  .shop-data {
+    margin-bottom: 2rem;
   }
 }

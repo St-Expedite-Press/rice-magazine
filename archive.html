@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RICE &ndash; Archive</title>
-  <meta name="description" content="RICE literary magazine — archive.">
-  <meta name="theme-color" content="#f9f8f4">
-  <link rel="icon" href="images/logo.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Scans, ledgers, maps, invoices, and field evidence from the Gulf interior.">
+  <meta name="theme-color" content="#f9f8f4"><link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <!-- Masthead -->
   <header class="masthead">
-    <div class="masthead-inner">
-      <p class="logo"><a href="index.html">RICE</a></p>
-      <span class="volume">VOL. 1</span>
-    </div>
-    <nav class="main-nav" aria-label="Primary">
-      <ul>
-        <li><a href="essays.html">Essays</a></li>
-        <li><a href="fiction.html">Fiction</a></li>
-        <li><a href="poetry.html">Poetry</a></li>
-        <li><a href="archive.html" aria-current="page">Archive</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="submissions.html">Submit</a></li>
-      </ul>
-    </nav>
+    <div class="masthead-inner"><p class="logo"><a href="index.html">RICE</a></p><span class="volume">VOL. 1</span></div>
+    <nav class="main-nav" aria-label="Primary"><ul><li><a href="essays.html">Essays</a></li><li><a href="fiction.html">Fiction</a></li><li><a href="poetry.html">Poetry</a></li><li><a href="archive.html" aria-current="page">Archive</a></li><li><a href="shop.html">Shop</a></li><li><a href="about.html">About</a></li><li><a href="submissions.html">Submit</a></li></ul></nav>
   </header>
-
-  <aside class="coords-left" aria-hidden="true">29.9511° N, 90.0715° W</aside>
-  <aside class="coords-right" aria-hidden="true">NEW ORLEANS, LA</aside>
-
-  <main id="main-content">
-    <section class="page-content">
+  <aside class="coords-left" aria-hidden="true">ACCESSION / SOURCE / PARISH</aside><aside class="coords-right" aria-hidden="true">GULF INTERIOR MATERIAL INDEX</aside>
+  <main id="main-content" class="section-shell">
+    <header class="section-hero">
       <h1>Archive</h1>
-      <p class="page-intro">Scans, invoices, ledger entries, and ephemera from across the Gulf interior.</p>
-      <p>This space will house the materials that inspire RICE. Future issues will make them available for study.</p>
+      <div class="section-hero-copy" data-code="RICE / MATERIAL INDEX / A-01">Scans, invoices, maps, receipts, weather records, and the physical paperwork behind the region’s abstractions.</div>
+    </header>
+    <div class="archive-toolbar archive-filters" aria-label="Archive filters">
+      <button type="button" data-archive-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-archive-filter="ledger" aria-pressed="false">Ledgers</button>
+      <button type="button" data-archive-filter="field" aria-pressed="false">Field</button>
+      <button type="button" data-archive-filter="weather" aria-pressed="false">Weather</button>
+    </div>
+    <section class="archive-grid" data-archive-grid>
+      <a class="archive-card wide" data-tags="ledger field" href="archive-template.html">
+        <img src="images/archive-ledger.jpg" alt="Aged rice mill operations ledger from 1911" width="1200" height="900">
+        <span class="archive-label"><strong>Mill Ledger, 1911</strong>RC-ACD-1911-004 / Acadia Parish / Ledger</span>
+      </a>
+      <a class="archive-card" data-tags="field weather" href="archive-template.html">
+        <img src="images/rice_field.png" alt="Rice field under a golden evening sky" width="1672" height="941">
+        <span class="archive-label"><strong>Field at 19:42</strong>RC-FLD-2026-017 / Weather / Photograph</span>
+      </a>
+      <a class="archive-card" data-tags="weather" href="archive-template.html">
+        <img src="images/feature.png" alt="Monochrome abstract field record" width="1280" height="720">
+        <span class="archive-label"><strong>Damp Heat Index</strong>RC-WTH-2026-009 / Survey / Chart</span>
+      </a>
+      <a class="archive-card wide" data-tags="ledger" href="archive-template.html">
+        <img src="images/archive-ledger.jpg" alt="Detail from an aged rice ledger" width="1200" height="900">
+        <span class="archive-label"><strong>Shipper / Weight / Grade</strong>RC-ACD-1911-004B / Detail / Ledger</span>
+      </a>
     </section>
   </main>
-
-  <footer class="footer">
-    <a href="https://stexpedite.press">ST. EXPEDITE PRESS</a>
-    <a href="about.html">ABOUT</a>
-    <a href="submissions.html">SUBMISSIONS</a>
-    <span>29.9511° N, 90.0715° W</span>
-    <span>NEW ORLEANS, LA</span>
-  </footer>
+  <footer class="footer"><a href="https://stexpedite.press">ST. EXPEDITE PRESS</a><a href="about.html">ABOUT</a><a href="submissions.html">SUBMISSIONS</a><span>ARCHIVE UPDATED 06 / 2026</span></footer>
 </body>
 </html>

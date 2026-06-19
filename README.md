@@ -18,9 +18,9 @@ Founded by [St. Expedite Press](https://stexpedite.press), RICE functions as a b
 
 The site treats the web edition as a piece of printed matter: a strict editorial grid, heavy grotesque masthead, serif reading typography, monospace metadata, photocopied grain, and restrained black rules. New Orleans coordinates run through the identity as a quiet geographic colophon.
 
-The splash page pairs a distressed paper panel with an ambient, image-generated rice-field loop. The main issue page shifts into a monochrome broadsheet layout with a featured story, table of contents, section pages, article templates, an archive format, submissions information, and a shop placeholder.
+The splash page pairs a distressed paper panel with an ambient, image-generated rice-field loop. The main issue expands into oversized section indexes, asymmetric reading pages, marginal notes, pull quotes, a freeform poetry stage, a filterable archive, a submission call sheet, a manifesto, and a physical-edition specimen.
 
-The design is intentionally lightweight and framework-free. It uses semantic HTML and a single shared stylesheet, with responsive layouts, keyboard focus states, reduced-motion support, poster-image fallback for video, and accessible page structure.
+The design is intentionally lightweight and framework-free. It uses semantic HTML, a shared stylesheet, and a small dependency-free interaction layer for issue search, archive filters, image zoom, and reading mode. Responsive layouts, keyboard focus states, reduced-motion support, and poster-image fallback remain built in.
 
 ## Screens
 
@@ -32,6 +32,16 @@ The design is intentionally lightweight and framework-free. It uses semantic HTM
 
 ![RICE Volume 1 homepage on mobile](docs/screenshots/home-mobile.png)
 
+### Editorial system
+
+| Essay index | Reading page |
+| --- | --- |
+| ![RICE essay section index](docs/screenshots/essays-index.png) | ![RICE essay reading page](docs/screenshots/essay-reading.png) |
+
+| Archive index | Physical issue specimen |
+| --- | --- |
+| ![RICE archive contact sheet](docs/screenshots/archive-index.png) | ![RICE Volume 1 shop specimen](docs/screenshots/shop-specimen.png) |
+
 ## Site structure
 
 - `splash.html` — ambient entrance page with preorder and submission actions
@@ -41,6 +51,7 @@ The design is intentionally lightweight and framework-free. It uses semantic HTM
 - `archive.html`, `archive-template.html` — archival material and field-card format
 - `about.html`, `submissions.html`, `shop.html` — magazine information and calls to action
 - `styles.css` — shared visual system and responsive behavior
+- `site.js` — search, reading mode, archive filters, zoom, and form states
 
 ## Local preview
 
