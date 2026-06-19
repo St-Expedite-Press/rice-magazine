@@ -52,6 +52,7 @@ The design is intentionally lightweight and framework-free. It uses semantic HTM
 - `about.html`, `submissions.html`, `shop.html` — magazine information and calls to action
 - `styles.css` — shared visual system and responsive behavior
 - `site.js` — search, reading mode, archive filters, zoom, and form states
+- [`docs/IMAGE_STYLE_GUIDE.md`](docs/IMAGE_STYLE_GUIDE.md) — C86 × South × St. Expedite Press image direction, prompt presets, and archive ethics
 
 ## Local preview
 
