@@ -109,8 +109,67 @@ function enableDemoForms() {
   });
 }
 
+function enableFeatureGalleries() {
+  document.querySelectorAll(".feature-strip").forEach(gallery => {
+    const slides = [...gallery.querySelectorAll(".feature-strip-item")];
+    if (slides.length < 2) return;
+
+    gallery.classList.add("feature-gallery");
+    slides.forEach((slide, index) => {
+      slide.classList.add("feature-slide");
+      slide.hidden = index !== 0;
+    });
+
+    const controls = document.createElement("div");
+    controls.className = "feature-gallery-controls";
+    controls.innerHTML = `
+      <button type="button" data-gallery-prev aria-label="Previous image">← PREV</button>
+      <span class="feature-gallery-count" aria-live="polite">01 / ${String(slides.length).padStart(2, "0")}</span>
+      <button type="button" data-gallery-next aria-label="Next image">NEXT →</button>
+    `;
+    gallery.append(controls);
+
+    let current = 0;
+    const show = index => {
+      slides[current].hidden = true;
+      current = (index + slides.length) % slides.length;
+      slides[current].hidden = false;
+      controls.querySelector(".feature-gallery-count").textContent =
+        `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+    };
+
+    controls.querySelector("[data-gallery-prev]").addEventListener("click", () => show(current - 1));
+    controls.querySelector("[data-gallery-next]").addEventListener("click", () => show(current + 1));
+
+    let timer = setInterval(() => show(current + 1), 6000);
+    const pause = () => clearInterval(timer);
+    const resume = () => {
+      clearInterval(timer);
+      timer = setInterval(() => show(current + 1), 6000);
+    };
+    gallery.addEventListener("mouseenter", pause);
+    gallery.addEventListener("mouseleave", resume);
+    gallery.addEventListener("focusin", pause);
+    gallery.addEventListener("focusout", resume);
+
+    let startX = null;
+    gallery.addEventListener("touchstart", event => {
+      pause();
+      startX = event.touches[0].clientX;
+    }, { passive: true });
+    gallery.addEventListener("touchend", event => {
+      if (startX === null) return;
+      const distance = event.changedTouches[0].clientX - startX;
+      if (Math.abs(distance) > 45) show(current + (distance < 0 ? 1 : -1));
+      startX = null;
+      resume();
+    }, { passive: true });
+  });
+}
+
 buildUtilities();
 enableReadingMode();
 enableArchiveFilters();
 enableArchiveZoom();
 enableDemoForms();
+enableFeatureGalleries();
