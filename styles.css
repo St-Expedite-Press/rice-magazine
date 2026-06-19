@@ -561,6 +561,61 @@ body.splash::before {
   color: #fff;
 }
 
+.splash-signup {
+  width: min(100%, 18rem);
+  margin-top: 1.35rem;
+  text-align: center;
+}
+
+.splash-signup label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font: 700 0.62rem/1 "Courier New", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.splash-signup-row {
+  display: flex;
+  justify-content: center;
+}
+
+.splash-signup input,
+.splash-signup button {
+  min-height: 2.35rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  font: 0.68rem/1 "Courier New", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.splash-signup input {
+  min-width: 0;
+  flex: 1;
+  padding: 0.6rem 0.7rem;
+  border-right: 0;
+  background: rgba(249, 248, 244, 0.55);
+  color: var(--ink);
+}
+
+.splash-signup input::placeholder {
+  color: #555;
+  opacity: 1;
+}
+
+.splash-signup button {
+  padding: 0.6rem 0.8rem;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+}
+
+.splash-signup button:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
 @media (max-width: 800px) {
   .masthead {
     align-items: flex-start;
@@ -632,6 +687,10 @@ body.splash::before {
 
   .splash-btn {
     width: 100%;
+  }
+
+  .splash-signup {
+    margin-top: 1rem;
   }
 }
 
