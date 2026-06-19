@@ -1,50 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RICE &ndash; Shop</title>
-  <meta name="description" content="RICE literary magazine — shop.">
-  <meta name="theme-color" content="#f9f8f4">
-  <link rel="icon" href="images/logo.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop &ndash; RICE</title>
+  <meta name="description" content="RICE Volume 1: a physical literary broadsheet from St. Expedite Press.">
+  <meta name="theme-color" content="#f9f8f4"><link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <!-- Masthead -->
   <header class="masthead">
-    <div class="masthead-inner">
-      <p class="logo"><a href="index.html">RICE</a></p>
-      <span class="volume">VOL. 1</span>
-    </div>
-    <nav class="main-nav" aria-label="Primary">
-      <ul>
-        <li><a href="essays.html">Essays</a></li>
-        <li><a href="fiction.html">Fiction</a></li>
-        <li><a href="poetry.html">Poetry</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="shop.html" aria-current="page">Shop</a></li>
-      </ul>
-    </nav>
+    <div class="masthead-inner"><p class="logo"><a href="index.html">RICE</a></p><span class="volume">VOL. 1</span></div>
+    <nav class="main-nav" aria-label="Primary"><ul><li><a href="essays.html">Essays</a></li><li><a href="fiction.html">Fiction</a></li><li><a href="poetry.html">Poetry</a></li><li><a href="archive.html">Archive</a></li><li><a href="shop.html" aria-current="page">Shop</a></li><li><a href="about.html">About</a></li><li><a href="submissions.html">Submit</a></li></ul></nav>
   </header>
-
-  <aside class="coords-left" aria-hidden="true">29.9511° N, 90.0715° W</aside>
-  <aside class="coords-right" aria-hidden="true">NEW ORLEANS, LA</aside>
-
-  <main id="main-content">
-    <section class="page-content">
-      <h1>Shop</h1>
-      <p class="page-intro">Physical issues, chapbooks, and printed matter from RICE.</p>
-      <p>Volume 1 is not yet available. Check back for preorder information.</p>
+  <main id="main-content" class="shop-specimen">
+    <figure class="shop-image"><img src="images/issue-specimen.jpg" alt="RICE Volume 1 magazine specimen on a photocopier bed" width="1200" height="900"></figure>
+    <section class="shop-data">
+      <div class="breadcrumbs">ST. EXPEDITE PRESS / EDITION 001</div>
+      <h1>RICE</h1>
+      <p class="page-intro">Volume 1 / a physical broadsheet for the Gulf interior.</p>
+      <div class="edition-ledger">
+        <div><span>Status</span><strong>Preorder pending</strong></div>
+        <div><span>Format</span><strong>Softcover / staple bound</strong></div>
+        <div><span>Trim</span><strong>8.5 × 11 in.</strong></div>
+        <div><span>Extent</span><strong>64 pages</strong></div>
+        <div><span>Stock</span><strong>Uncoated / off-white</strong></div>
+        <div><span>Edition</span><strong>250 copies</strong></div>
+        <div><span>Printer</span><strong>To be announced</strong></div>
+      </div>
+      <form class="signup-form">
+        <label for="shop-email">Notify me when Volume 1 opens</label>
+        <div class="signup-form-row"><input id="shop-email" name="email" type="email" autocomplete="email" placeholder="EMAIL ADDRESS" required><button type="submit">Notify</button></div>
+        <p class="form-status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
-
-  <footer class="footer">
-    <a href="https://stexpedite.press">ST. EXPEDITE PRESS</a>
-    <a href="about.html">ABOUT</a>
-    <a href="submissions.html">SUBMISSIONS</a>
-    <span>29.9511° N, 90.0715° W</span>
-    <span>NEW ORLEANS, LA</span>
-  </footer>
+  <footer class="footer"><a href="https://stexpedite.press">ST. EXPEDITE PRESS</a><a href="about.html">ABOUT</a><a href="submissions.html">SUBMISSIONS</a><span>EDITION 001 / 2026</span></footer>
 </body>
 </html>
