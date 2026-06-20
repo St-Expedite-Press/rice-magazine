@@ -54,6 +54,10 @@ The design is intentionally lightweight and framework-free. It uses semantic HTM
 - `site.js` — search, reading mode, archive filters, zoom, and form states
 - [`docs/IMAGE_STYLE_GUIDE.md`](docs/IMAGE_STYLE_GUIDE.md) — C86 × South × St. Expedite Press image direction, prompt presets, and archive ethics
 
+Additional image direction: [`docs/CITY_IMAGE_PROMPTS.md`](docs/CITY_IMAGE_PROMPTS.md) contains five tightly constrained image families for five Southern bohemian cities.
+
+The generated collection is managed through [`assets/catalog.json`](assets/catalog.json), documented in [`assets/README.md`](assets/README.md), and browsable at `asset-library.html`. Run `python scripts/build_asset_library.py` after adding or replacing approved masters.
+
 ## Local preview
 
 Serve the repository with any static web server:

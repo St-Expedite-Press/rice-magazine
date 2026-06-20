@@ -182,6 +182,32 @@ function enableFeatureGalleries() {
   });
 }
 
+function installEditorialAccent() {
+  const main = document.querySelector("main");
+  if (!main) return;
+
+  const hasOwnedAccent = document.body.matches(".reading-page, .splash, .asset-library-page")
+    || main.querySelector(".publication-object, .submission-status");
+  if (hasOwnedAccent) return;
+
+  const accent = document.createElement("span");
+  accent.className = "editorial-accent";
+  accent.setAttribute("aria-hidden", "true");
+
+  const feature = main.querySelector(":scope > .feature-strip");
+  if (feature) {
+    feature.after(accent);
+  } else {
+    main.prepend(accent);
+  }
+}
+
+function enablePageTransition() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.body.classList.add("page-entering");
+  window.setTimeout(() => document.body.classList.remove("page-entering"), 420);
+}
+
 buildUtilities();
 enableReadingMode();
 enableArchiveFilters();
@@ -189,3 +215,5 @@ enableIssueFilters();
 enableArchiveZoom();
 enableDemoForms();
 enableFeatureGalleries();
+installEditorialAccent();
+enablePageTransition();

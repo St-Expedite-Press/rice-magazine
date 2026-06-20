@@ -9,6 +9,15 @@
   --transition: 160ms ease;
   --acid: #d9ff00;
   --black: #090909;
+  --type-micro: clamp(0.64rem, 0.61rem + 0.1vw, 0.7rem);
+  --type-meta: clamp(0.7rem, 0.67rem + 0.12vw, 0.78rem);
+  --type-ui: clamp(0.76rem, 0.72rem + 0.14vw, 0.84rem);
+  --type-body: clamp(1rem, 0.97rem + 0.14vw, 1.08rem);
+  --type-reading: clamp(1.05rem, 1rem + 0.2vw, 1.16rem);
+  --type-lead: clamp(1.12rem, 1.03rem + 0.42vw, 1.36rem);
+  --type-subhead: clamp(1.45rem, 1.15rem + 1.2vw, 2.2rem);
+  --type-heading: clamp(2rem, 1.45rem + 2.5vw, 3.8rem);
+  --type-display: clamp(3.5rem, 2rem + 6vw, 7.25rem);
 }
 
 * {
@@ -27,7 +36,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1rem;
+  font-size: var(--type-body);
   line-height: 1.65;
   position: relative;
   overflow-x: clip;
@@ -42,6 +51,42 @@ body::before {
   opacity: 0.055;
   mix-blend-mode: multiply;
   pointer-events: none;
+}
+
+body.reading-page::before {
+  opacity: 0.025;
+}
+
+body.reading-mode::before {
+  opacity: 0.012;
+}
+
+body.page-entering::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(9, 9, 9, 0.08) 50%, transparent 50.2%),
+    rgba(249, 248, 244, 0.7);
+  pointer-events: none;
+  animation: toner-flicker 340ms steps(2, end) both;
+}
+
+body.page-entering main {
+  animation: registration-settle 340ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes toner-flicker {
+  0% { opacity: 0.8; }
+  35% { opacity: 0.18; }
+  58% { opacity: 0.34; }
+  100% { opacity: 0; }
+}
+
+@keyframes registration-settle {
+  0% { opacity: 0.72; transform: translateX(2px); }
+  100% { opacity: 1; transform: none; }
 }
 
 header,
@@ -76,7 +121,7 @@ button:focus-visible {
   padding: 0.65rem 0.9rem;
   background: var(--ink);
   color: #fff;
-  font: 700 0.75rem/1 "Courier New", monospace;
+  font: 700 var(--type-ui)/1 "Courier New", monospace;
   letter-spacing: 0.08em;
   text-decoration: none;
   text-transform: uppercase;
@@ -117,7 +162,7 @@ button:focus-visible {
 .logo {
   margin: 0;
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: clamp(3.2rem, 7vw, 5.25rem);
+  font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 900;
   line-height: 0.82;
   letter-spacing: -0.075em;
@@ -130,7 +175,7 @@ button:focus-visible {
 
 .volume {
   margin-left: 1rem;
-  font: 700 0.72rem/1 "Courier New", monospace;
+  font: 700 var(--type-meta)/1 "Courier New", monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -148,7 +193,7 @@ button:focus-visible {
   display: inline-block;
   padding: 0.25rem 0;
   border-bottom: 2px solid transparent;
-  font: 700 0.78rem/1.3 Arial, sans-serif;
+  font: 700 var(--type-ui)/1.3 Arial, sans-serif;
   letter-spacing: 0.07em;
   text-decoration: none;
   text-transform: uppercase;
@@ -165,7 +210,7 @@ button:focus-visible {
   position: fixed;
   top: 50%;
   color: var(--muted);
-  font: 0.68rem/1 "Courier New", monospace;
+  font: var(--type-micro)/1 "Courier New", monospace;
   letter-spacing: 0.06em;
   white-space: nowrap;
   writing-mode: vertical-rl;
@@ -215,14 +260,14 @@ button:focus-visible {
 .feature-kicker {
   display: block;
   margin-bottom: 0.35rem;
-  font: 700 0.7rem/1.2 "Courier New", monospace;
+  font: 700 var(--type-meta)/1.2 "Courier New", monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .feature-title {
   margin: 0;
-  font-size: clamp(1.6rem, 4vw, 3.5rem);
+  font-size: var(--type-heading);
   line-height: 1;
 }
 
@@ -239,7 +284,7 @@ button:focus-visible {
 
 .feature-byline {
   margin: 0.55rem 0 0;
-  font: 0.78rem/1.4 "Courier New", monospace;
+  font: var(--type-ui)/1.4 "Courier New", monospace;
 }
 
 .toc {
@@ -248,7 +293,7 @@ button:focus-visible {
 
 .toc-heading {
   margin: 0 0 0.75rem;
-  font: 700 0.72rem/1.2 "Courier New", monospace;
+  font: 700 var(--type-meta)/1.2 "Courier New", monospace;
   letter-spacing: 0.13em;
   text-transform: uppercase;
 }
@@ -275,20 +320,20 @@ button:focus-visible {
 
 .kind-num {
   color: var(--muted);
-  font: 0.73rem/1.15 "Courier New", monospace;
+  font: var(--type-meta)/1.15 "Courier New", monospace;
   text-transform: uppercase;
 }
 
 .kind-num .num {
   display: block;
   color: var(--ink);
-  font-size: 0.88rem;
+  font-size: var(--type-ui);
   font-weight: 700;
 }
 
 .title {
   margin: 0;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-size: clamp(1.08rem, 0.98rem + 0.45vw, 1.35rem);
   line-height: 1.25;
 }
 
@@ -298,7 +343,7 @@ button:focus-visible {
 
 .author {
   color: var(--muted);
-  font: 0.8rem/1.3 "Courier New", monospace;
+  font: var(--type-ui)/1.3 "Courier New", monospace;
   text-align: right;
 }
 
@@ -316,7 +361,7 @@ button:focus-visible {
 .page-content h1,
 .page-content h2 {
   margin: 0 0 1.25rem;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: var(--type-heading);
   line-height: 1;
 }
 
@@ -327,28 +372,28 @@ button:focus-visible {
 
 .page-intro {
   max-width: 58ch;
-  font-size: clamp(1.1rem, 2vw, 1.28rem);
+  font-size: var(--type-lead);
   line-height: 1.55;
 }
 
 .breadcrumbs {
   margin-bottom: 1rem;
   color: var(--muted);
-  font: 0.74rem/1.35 "Courier New", monospace;
+  font: var(--type-meta)/1.35 "Courier New", monospace;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
 .article-header h1 {
   margin: 0 0 0.65rem;
-  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-size: clamp(2.2rem, 1.45rem + 3.25vw, 4.35rem);
   line-height: 0.98;
 }
 
 .article-header .deck {
   margin: 0 0 1rem;
   color: #3f3f3f;
-  font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+  font-size: var(--type-lead);
   font-style: italic;
   font-weight: 400;
   line-height: 1.35;
@@ -358,7 +403,7 @@ button:focus-visible {
 .poem-byline {
   margin-bottom: 1rem;
   color: var(--muted);
-  font: 0.8rem/1.5 "Courier New", monospace;
+  font: var(--type-ui)/1.5 "Courier New", monospace;
 }
 
 .divider {
@@ -370,7 +415,7 @@ button:focus-visible {
 .article-body {
   width: min(66ch, calc(100% - (2 * var(--page-margin))));
   margin: 0 auto 4rem;
-  font-size: clamp(1.03rem, 1.5vw, 1.12rem);
+  font-size: var(--type-reading);
   line-height: 1.75;
 }
 
@@ -386,13 +431,13 @@ button:focus-visible {
 
 .poem-title {
   margin: 0 0 0.5rem;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: var(--type-heading);
   line-height: 1.05;
 }
 
 .poem-body {
   margin-bottom: 1.5rem;
-  font-size: 1.05rem;
+  font-size: var(--type-reading);
   line-height: 1.7;
   white-space: pre-line;
 }
@@ -400,7 +445,7 @@ button:focus-visible {
 .poem-metadata,
 .field-card {
   color: var(--muted);
-  font: 0.76rem/1.5 "Courier New", monospace;
+  font: var(--type-meta)/1.5 "Courier New", monospace;
 }
 
 .archive-image {
@@ -442,7 +487,7 @@ button:focus-visible {
   justify-content: center;
   gap: 0.55rem 1rem;
   color: #3e3e3e;
-  font: 0.72rem/1.4 Arial, sans-serif;
+  font: var(--type-meta)/1.4 Arial, sans-serif;
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -531,14 +576,23 @@ body.splash::before {
 .splash-container h1 {
   margin: 0;
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: clamp(3.75rem, 16vw, 6rem);
+  font-size: clamp(3.6rem, 2.3rem + 6vw, 5.75rem);
   line-height: 0.9;
   letter-spacing: -0.07em;
 }
 
+.splash-container h1::after {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 0.4rem;
+  margin: 0.75rem auto 0;
+  background: var(--acid);
+}
+
 .splash-tagline {
   margin: 0.8rem 0 0;
-  font: 0.68rem/1.4 "Courier New", monospace;
+  font: var(--type-micro)/1.4 "Courier New", monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -558,7 +612,7 @@ body.splash::before {
   border: 2px solid var(--ink);
   background: var(--ink);
   color: #fff;
-  font: 0.82rem/1 "Courier New", monospace;
+  font: var(--type-ui)/1 "Courier New", monospace;
   letter-spacing: 0.09em;
   text-decoration: none;
   text-transform: uppercase;
@@ -585,7 +639,7 @@ body.splash::before {
 .splash-signup label {
   display: block;
   margin-bottom: 0.45rem;
-  font: 700 0.62rem/1 "Courier New", monospace;
+  font: 700 var(--type-micro)/1 "Courier New", monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -600,7 +654,7 @@ body.splash::before {
   min-height: 2.35rem;
   border: 1px solid var(--ink);
   border-radius: 0;
-  font: 0.68rem/1 "Courier New", monospace;
+  font: var(--type-meta)/1 "Courier New", monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -672,7 +726,7 @@ body.splash::before {
   }
 
   .main-nav a {
-    font-size: 0.72rem;
+    font-size: var(--type-meta);
     letter-spacing: 0.055em;
   }
 
@@ -691,7 +745,7 @@ body.splash::before {
   }
 
   .splash-container h1 {
-    font-size: clamp(3.25rem, 17vw, 4.5rem);
+    font-size: clamp(3.15rem, 15vw, 4.25rem);
   }
 
   .splash-actions {
@@ -716,7 +770,7 @@ body.splash::before {
   }
 
   .splash-container h1 {
-    font-size: clamp(3rem, 15vh, 5rem);
+    font-size: clamp(2.85rem, 13vh, 4.5rem);
   }
 
   .splash-tagline {
@@ -743,6 +797,14 @@ body.splash::before {
   .splash-video {
     display: none;
   }
+
+  body.page-entering::after {
+    display: none;
+  }
+
+  body.page-entering main {
+    animation: none;
+  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -753,7 +815,7 @@ body.splash::before {
   align-items: center;
   gap: 0.75rem;
   margin-left: auto;
-  font: 700 0.68rem/1 "Courier New", monospace;
+  font: 700 var(--type-meta)/1 "Courier New", monospace;
   letter-spacing: 0.08em;
 }
 
@@ -797,7 +859,7 @@ body.splash::before {
 .search-heading {
   display: flex;
   justify-content: space-between;
-  font: 700 0.72rem/1 "Courier New", monospace;
+  font: 700 var(--type-meta)/1 "Courier New", monospace;
   letter-spacing: 0.1em;
 }
 
@@ -817,7 +879,7 @@ body.splash::before {
   border-radius: 0;
   background: transparent;
   color: inherit;
-  font: 900 clamp(1.4rem, 5vw, 3.5rem)/1 "Arial Black", Arial, sans-serif;
+  font: 900 clamp(1.4rem, 1rem + 2.4vw, 3rem)/1 "Arial Black", Arial, sans-serif;
   text-transform: uppercase;
 }
 
@@ -834,12 +896,13 @@ body.splash::before {
 .search-result span,
 .search-result small,
 .empty-state {
-  font: 0.7rem/1.4 "Courier New", monospace;
+  font: var(--type-meta)/1.4 "Courier New", monospace;
   text-transform: uppercase;
 }
 
 .search-result:hover {
-  background: var(--acid);
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .section-shell {
@@ -900,13 +963,13 @@ body.splash::before {
   padding: 0.5rem 0.65rem;
   background: var(--paper);
   border: 1px solid var(--ink);
-  font: 0.64rem/1.3 "Courier New", monospace;
+  font: var(--type-micro)/1.3 "Courier New", monospace;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .feature-strip-item figcaption strong {
-  font-size: 0.74rem;
+  font-size: var(--type-meta);
 }
 
 .feature-strip-item[hidden] {
@@ -921,7 +984,7 @@ body.splash::before {
   padding: 0.55rem 0.7rem 0.7rem;
   border-top: 1px solid var(--ink);
   background: var(--paper);
-  font: 0.66rem/1 "Courier New", monospace;
+  font: var(--type-micro)/1 "Courier New", monospace;
   letter-spacing: 0.06em;
 }
 
@@ -978,12 +1041,12 @@ body.splash::before {
 .section-record::before {
   counter-increment: section-entry;
   content: "0" counter(section-entry);
-  font: 700 0.75rem/1 "Courier New", monospace;
+  font: 700 var(--type-meta)/1 "Courier New", monospace;
 }
 
 .section-record h2 {
   margin: 0;
-  font-size: clamp(1.8rem, 5vw, 4.5rem);
+  font-size: clamp(1.8rem, 1.1rem + 3.2vw, 4rem);
   line-height: 0.95;
 }
 
@@ -1000,7 +1063,7 @@ body.splash::before {
 .record-meta {
   align-self: end;
   color: var(--muted);
-  font: 0.72rem/1.5 "Courier New", monospace;
+  font: var(--type-meta)/1.5 "Courier New", monospace;
   text-transform: uppercase;
 }
 
@@ -1010,7 +1073,7 @@ body.splash::before {
 }
 
 .section-record:hover {
-  background: linear-gradient(90deg, transparent 0 4%, var(--acid) 4% 100%);
+  background: rgba(9, 9, 9, 0.045);
 }
 
 .article-header.editorial {
@@ -1025,7 +1088,7 @@ body.splash::before {
 .article-header.editorial h1 {
   max-width: 11ch;
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: clamp(4rem, 10vw, 8rem);
+  font-size: var(--type-display);
   letter-spacing: -0.08em;
   line-height: 0.78;
   text-transform: uppercase;
@@ -1037,8 +1100,12 @@ body.splash::before {
   border-top: 8px solid var(--acid);
 }
 
+.submission-page .article-side {
+  border-top-color: var(--ink);
+}
+
 .article-side .deck {
-  font-size: clamp(1.2rem, 2.3vw, 1.7rem);
+  font-size: clamp(1.15rem, 1.02rem + 0.62vw, 1.5rem);
 }
 
 .article-layout {
@@ -1056,7 +1123,7 @@ body.splash::before {
   display: grid;
   gap: 2rem;
   color: var(--muted);
-  font: 0.68rem/1.45 "Courier New", monospace;
+  font: var(--type-micro)/1.45 "Courier New", monospace;
   text-transform: uppercase;
 }
 
@@ -1073,7 +1140,7 @@ body.splash::before {
 .article-body > p:first-child::first-letter {
   float: left;
   margin: 0.08em 0.1em 0 0;
-  font: 900 5.5rem/0.72 "Arial Black", Arial, sans-serif;
+  font: 900 clamp(4.4rem, 4rem + 1.6vw, 5.3rem)/0.72 "Arial Black", Arial, sans-serif;
 }
 
 .pull-quote {
@@ -1081,7 +1148,7 @@ body.splash::before {
   margin: 3rem 0 3rem clamp(-10rem, -10vw, -3rem);
   padding: 1.5rem 0;
   border-block: 2px solid var(--ink);
-  font-size: clamp(2rem, 5vw, 4.8rem);
+  font-size: clamp(1.8rem, 1.1rem + 3vw, 4.1rem);
   font-style: italic;
   line-height: 0.98;
 }
@@ -1100,8 +1167,82 @@ body.splash::before {
 
 .article-figure figcaption {
   margin-top: 0.65rem;
-  font: 0.68rem/1.45 "Courier New", monospace;
+  font: var(--type-micro)/1.45 "Courier New", monospace;
   text-transform: uppercase;
+}
+
+.document-insert {
+  width: min(82%, 42rem);
+  margin: 3.5rem auto;
+  padding: 0.7rem;
+  border: 1px solid var(--ink);
+  background: #e8e1d1;
+  box-shadow: 0.55rem 0.55rem 0 var(--black);
+}
+
+.document-insert img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(100%) contrast(1.12);
+}
+
+.document-insert figcaption,
+.full-bleed-figure figcaption {
+  margin-top: 0.65rem;
+  font: var(--type-micro)/1.45 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.data-table {
+  width: min(72%, 32rem);
+  margin: 3.5rem 0 3.5rem auto;
+  border-collapse: collapse;
+  font: var(--type-meta)/1.4 "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+.data-table caption {
+  padding: 0 0 0.6rem;
+  border-bottom: 2px solid var(--ink);
+  text-align: left;
+  font-weight: 700;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+
+.data-table th {
+  width: 32%;
+}
+
+.marginal-quotation {
+  float: right;
+  width: min(18rem, 42%);
+  margin: 0.4rem clamp(-9rem, -8vw, -3rem) 1.5rem 2rem;
+  padding-top: 0.75rem;
+  border-top: 2px solid var(--ink);
+  font-size: var(--type-lead);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+.full-bleed-figure {
+  clear: both;
+  width: min(84vw, 1100px);
+  margin: 3.5rem 0 3.5rem clamp(-9rem, -8vw, -3rem);
+}
+
+.full-bleed-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-block: 1px solid var(--ink);
+  filter: grayscale(100%) contrast(1.12);
 }
 
 .reading-toolbar {
@@ -1119,7 +1260,7 @@ body.splash::before {
   border-radius: 0;
   background: transparent;
   color: inherit;
-  font: 700 0.68rem/1 "Courier New", monospace;
+  font: 700 var(--type-meta)/1 "Courier New", monospace;
   letter-spacing: 0.07em;
   text-decoration: none;
   text-transform: uppercase;
@@ -1153,12 +1294,12 @@ body.splash::before {
 
 .article-pagination span {
   display: block;
-  font: 0.65rem/1 "Courier New", monospace;
+  font: var(--type-micro)/1 "Courier New", monospace;
   text-transform: uppercase;
 }
 
 .article-pagination strong {
-  font-size: clamp(1.3rem, 3vw, 2.8rem);
+  font-size: var(--type-subhead);
 }
 
 .poem-stage {
@@ -1177,7 +1318,7 @@ body.splash::before {
 
 .poem-stage .poem-title {
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(2.8rem, 1.75rem + 4.8vw, 6rem);
   line-height: 0.82;
   letter-spacing: -0.07em;
   text-transform: uppercase;
@@ -1187,7 +1328,7 @@ body.splash::before {
 
 .poem-stage .poem-body {
   margin: clamp(2rem, 8vw, 7rem) 0 0;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-size: var(--type-lead);
   line-height: 1.9;
   white-space: pre-wrap;
 }
@@ -1195,7 +1336,7 @@ body.splash::before {
 .poem-folio {
   padding-top: 0.6rem;
   border-top: 7px solid var(--acid);
-  font: 0.68rem/1.5 "Courier New", monospace;
+  font: var(--type-micro)/1.5 "Courier New", monospace;
   text-transform: uppercase;
 }
 
@@ -1244,13 +1385,13 @@ body.splash::before {
   padding: 0.75rem;
   background: var(--paper);
   border-top: 1px solid var(--ink);
-  font: 0.68rem/1.45 "Courier New", monospace;
+  font: var(--type-micro)/1.45 "Courier New", monospace;
   text-transform: uppercase;
 }
 
 .archive-label strong {
   display: block;
-  font-size: 0.85rem;
+  font-size: var(--type-ui);
 }
 
 .archive-record {
@@ -1317,7 +1458,7 @@ body.splash::before {
   right: 0.7rem;
   border: 0;
   background: transparent;
-  font: 700 0.7rem/1 "Courier New", monospace;
+  font: 700 var(--type-meta)/1 "Courier New", monospace;
   cursor: pointer;
 }
 
@@ -1334,7 +1475,7 @@ body.splash::before {
 .manifesto-lead {
   max-width: 15ch;
   margin: 0 0 5rem;
-  font-size: clamp(3rem, 9vw, 8.5rem);
+  font-size: clamp(3rem, 1.6rem + 6.5vw, 7.5rem);
   line-height: 0.9;
   letter-spacing: -0.055em;
 }
@@ -1357,12 +1498,12 @@ body.splash::before {
 }
 
 .proposition span {
-  font: 700 0.7rem/1 "Courier New", monospace;
+  font: 700 var(--type-meta)/1 "Courier New", monospace;
 }
 
 .proposition h2 {
   max-width: 14ch;
-  font-size: clamp(1.8rem, 4vw, 3.8rem);
+  font-size: clamp(1.65rem, 1.2rem + 2vw, 3.2rem);
   line-height: 1;
 }
 
@@ -1378,9 +1519,85 @@ body.splash::before {
 .colophon-panel {
   grid-column: span 4;
   padding: 1rem;
-  border-top: 7px solid var(--acid);
-  font: 0.75rem/1.55 "Courier New", monospace;
+  border-top: 1px solid var(--ink);
+  font: var(--type-meta)/1.55 "Courier New", monospace;
 }
+
+.publication-object {
+  position: relative;
+}
+
+.publication-object::before {
+  content: "";
+  position: absolute;
+  inset: -0.8rem;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--ink), var(--ink)) left top / 1.2rem 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left top / 1px 1.2rem no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right top / 1.2rem 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right top / 1px 1.2rem no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left bottom / 1.2rem 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) left bottom / 1px 1.2rem no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right bottom / 1.2rem 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) right bottom / 1px 1.2rem no-repeat;
+  opacity: 0.65;
+}
+
+.publication-object::after {
+  content: "";
+  position: absolute;
+  top: -0.3rem;
+  left: 50%;
+  width: 1.15rem;
+  height: 0.18rem;
+  border: 1px solid #777;
+  border-radius: 50%;
+  box-shadow: 0 0.38rem 0 -1px var(--paper), 0 0.38rem 0 #777;
+  transform: translateX(-50%) rotate(-2deg);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.publication-specline {
+  margin: 1.2rem 0 0;
+  padding: 0.55rem 0.7rem;
+  border-left: 0.55rem solid var(--acid);
+  background: var(--black);
+  color: var(--paper);
+  font: var(--type-micro)/1.35 "Courier New", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.shop-specimen .publication-specline {
+  border-left-color: var(--ink);
+}
+
+.colophon-grid .publication-specline {
+  grid-column: 1 / -1;
+  margin: 0 0 1rem;
+}
+
+.editorial-accent {
+  display: block;
+  width: 2.5rem;
+  height: 0.45rem;
+  margin: clamp(1rem, 2vw, 1.5rem) 0 0 auto;
+  background: var(--acid);
+}
+
+.section-shell > .editorial-accent {
+  margin-right: 0;
+}
+
+.page-content > .editorial-accent,
+.manifesto > .editorial-accent {
+  margin-left: 0;
+  margin-right: auto;
+}
+
 
 .submission-status {
   grid-column: span 5;
@@ -1396,7 +1613,7 @@ body.splash::before {
   display: inline-block;
   padding: 0.4rem 0.6rem;
   border: 2px solid var(--ink);
-  font: 900 clamp(1.4rem, 3vw, 2.5rem)/1 "Arial Black", Arial, sans-serif;
+  font: 900 clamp(1.35rem, 1.05rem + 1.25vw, 2.2rem)/1 "Arial Black", Arial, sans-serif;
   transform: rotate(-2deg);
 }
 
@@ -1415,14 +1632,14 @@ body.splash::before {
   margin: 0;
   padding: 0.85rem 0;
   border-top: 1px solid var(--ink);
-  font: 0.75rem/1.45 "Courier New", monospace;
+  font: var(--type-meta)/1.45 "Courier New", monospace;
   text-transform: uppercase;
 }
 
 .submission-copy {
   grid-column: 3 / span 8;
   margin-top: 3rem;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-size: var(--type-lead);
 }
 
 .shop-image {
@@ -1448,14 +1665,14 @@ body.splash::before {
 .shop-data h1 {
   margin: 0;
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: clamp(4rem, 10vw, 9rem);
+  font-size: clamp(3.75rem, 2rem + 7vw, 8rem);
   line-height: 0.75;
   letter-spacing: -0.08em;
 }
 
 .edition-ledger {
   margin: 2rem 0;
-  font: 0.75rem/1.5 "Courier New", monospace;
+  font: var(--type-meta)/1.5 "Courier New", monospace;
 }
 
 .edition-ledger div {
@@ -1479,7 +1696,7 @@ body.splash::before {
   min-height: 2.75rem;
   border: 1px solid var(--ink);
   border-radius: 0;
-  font: 0.7rem/1 "Courier New", monospace;
+  font: var(--type-meta)/1 "Courier New", monospace;
   text-transform: uppercase;
 }
 
@@ -1499,7 +1716,7 @@ body.splash::before {
 
 .form-status {
   min-height: 1.5em;
-  font: 0.62rem/1.4 "Courier New", monospace;
+  font: var(--type-micro)/1.4 "Courier New", monospace;
   text-transform: uppercase;
 }
 
@@ -1559,9 +1776,21 @@ body.reading-mode .poem-body {
   }
 
   .pull-quote,
-  .article-figure img {
+  .article-figure img,
+  .full-bleed-figure {
     width: 100%;
     margin-left: 0;
+  }
+
+  .document-insert,
+  .data-table {
+    width: 100%;
+  }
+
+  .marginal-quotation {
+    float: none;
+    width: min(28rem, 100%);
+    margin: 2rem 0;
   }
 
   .poem-stage {
@@ -1618,14 +1847,14 @@ body.reading-mode .poem-body {
     inset: 0.55rem 0.55rem auto auto;
     width: min(62%, 15rem);
     max-width: none;
-    font-size: 0.58rem;
+    font-size: var(--type-micro);
     white-space: normal;
     overflow-wrap: anywhere;
     overflow: hidden;
   }
 
   .article-header.editorial h1 {
-    font-size: clamp(2.9rem, 12vw, 4.2rem);
+    font-size: clamp(2.65rem, 10vw, 3.7rem);
     line-height: 0.82;
     overflow-wrap: normal;
   }
@@ -1674,6 +1903,14 @@ body.reading-mode .poem-body {
   .colophon-grid {
     display: block;
     margin-inline: 1rem;
+  }
+
+  .publication-object::before {
+    inset: -0.45rem;
+  }
+
+  .publication-object::after {
+    top: -0.1rem;
   }
 
   .submission-status,
