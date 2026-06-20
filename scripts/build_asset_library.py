@@ -7,6 +7,7 @@ Run from the repository root:
 from __future__ import annotations
 
 import json
+import hashlib
 import shutil
 from datetime import date
 from pathlib import Path
@@ -85,6 +86,14 @@ def relative(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def source_for(city_slug: str, filename: str, master_path: Path) -> Path:
     legacy_path = LEGACY_ROOT / city_slug / filename
     if master_path.exists():
@@ -122,10 +131,13 @@ def build() -> None:
                     "width": original.width,
                     "height": original.height,
                     "bytes": source.stat().st_size,
+                    "sha256": sha256(source),
                 }
 
             web_meta = save_jpeg(source, web, (1800, 1800), 86)
+            web_meta["sha256"] = sha256(web)
             thumb_meta = save_jpeg(source, thumb, (640, 640), 78)
+            thumb_meta["sha256"] = sha256(thumb)
 
             records.append(
                 {

@@ -67,19 +67,22 @@
           "path": "images/editorial/city-field-notes/new-orleans/master/new-orleans-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 329478
+          "bytes": 329478,
+          "sha256": "b82e08abfe0d6e9a19e9f4d8819d6b3ee91a676eab737f4441bcd194d0df7c64"
         },
         "web": {
           "path": "images/editorial/city-field-notes/new-orleans/web/new-orleans-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 197834
+          "bytes": 197834,
+          "sha256": "bd19d697d6fff5e275b4337cec0bf845682d28b5c43d0914dd501435b15b40bf"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/new-orleans/thumb/new-orleans-street-field-note.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 37811
+          "bytes": 37811,
+          "sha256": "e68f725a06f7c6491953ee1242a08d94f29163478fe909ba115dd3ef73a86cc0"
         }
       }
     },
@@ -109,19 +112,22 @@
           "path": "images/editorial/city-field-notes/new-orleans/master/new-orleans-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 983397
+          "bytes": 983397,
+          "sha256": "ba93257e6a98d20a9e002a1e951472f6ae81feb2b96238669cd2ca191d659be5"
         },
         "web": {
           "path": "images/editorial/city-field-notes/new-orleans/web/new-orleans-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 275794
+          "bytes": 275794,
+          "sha256": "77738efcf1a2bb8a3da314f977e431b90d5c9d0355068accca0bb97cabc6b7be"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/new-orleans/thumb/new-orleans-working-interior.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 62396
+          "bytes": 62396,
+          "sha256": "2ac0230060893e5d5600c6c9ccb0b69e388c2e3d3812489f95b19ad8a796aaee"
         }
       }
     },
@@ -151,19 +157,22 @@
           "path": "images/editorial/city-field-notes/new-orleans/master/new-orleans-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 338935
+          "bytes": 338935,
+          "sha256": "16f66133f9b43df804a54e6d44de72c845698c0d5e03cf650eef40c7ec9a5769"
         },
         "web": {
           "path": "images/editorial/city-field-notes/new-orleans/web/new-orleans-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 208066
+          "bytes": 208066,
+          "sha256": "a2f3b28851fe8e6809dbf193b3ba1907fe4d6a44958aba1e0b1093235c68556b"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/new-orleans/thumb/new-orleans-archival-evidence.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 53131
+          "bytes": 53131,
+          "sha256": "43b6389901a577d34559d4d27b7f347410abba138c5efffcf95f29c62e382d1f"
         }
       }
     },
@@ -193,19 +202,22 @@
           "path": "images/editorial/city-field-notes/new-orleans/master/new-orleans-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 395022
+          "bytes": 395022,
+          "sha256": "9ea09491c6948f9a672c4935ad2a009eb500d86c9b970c7d83d1ad2f93ab33a7"
         },
         "web": {
           "path": "images/editorial/city-field-notes/new-orleans/web/new-orleans-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 232033
+          "bytes": 232033,
+          "sha256": "b44370b92294051b948432fc89f6cdd6093cf0e2d1303a9cf32d24230566baf0"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/new-orleans/thumb/new-orleans-maker-portrait.jpg",
           "width": 478,
           "height": 640,
-          "bytes": 53695
+          "bytes": 53695,
+          "sha256": "005da30b8e5c9dda2b2bdaff2f693160abbe867c74360c5458dc9334e17bbcf9"
         }
       }
     },
@@ -235,19 +247,22 @@
           "path": "images/editorial/city-field-notes/new-orleans/master/new-orleans-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 319937
+          "bytes": 319937,
+          "sha256": "5927bc45194fc58c300eb07bf0765bb7ac5617f57f2ff358f3682ebc92038182"
         },
         "web": {
           "path": "images/editorial/city-field-notes/new-orleans/web/new-orleans-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 187141
+          "bytes": 187141,
+          "sha256": "8a15ffebf9fa113d4b34bdaad611ddd497a1220e6acc87cf66493fff991dd78b"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/new-orleans/thumb/new-orleans-nocturnal-aftermath.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 30979
+          "bytes": 30979,
+          "sha256": "cdacdad1e044bafd2a7804b5a3a1878d6f9b8dbddc76767b0f6eb1655da331c9"
         }
       }
     },
@@ -277,19 +292,22 @@
           "path": "images/editorial/city-field-notes/athens/master/athens-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 491162
+          "bytes": 491162,
+          "sha256": "a4557703bb65ca72467cff4eb598577b92e28860f0331195215a84fb9ae25448"
         },
         "web": {
           "path": "images/editorial/city-field-notes/athens/web/athens-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 317440
+          "bytes": 317440,
+          "sha256": "dd0f3701842bde62328ec86c25339f4c4329f5ebd90c17361359e4074a02ece0"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/athens/thumb/athens-street-field-note.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 56314
+          "bytes": 56314,
+          "sha256": "4cc070b5c184806998ee7970754e4ff8243a7ca0efa845cd6218a6fb09d62861"
         }
       }
     },
@@ -319,19 +337,22 @@
           "path": "images/editorial/city-field-notes/athens/master/athens-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 973607
+          "bytes": 973607,
+          "sha256": "7fc8bfd7f3aa3d71d3afda0e827bc3071ea7ebfafff3f3d1a11634d5485a270f"
         },
         "web": {
           "path": "images/editorial/city-field-notes/athens/web/athens-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 271181
+          "bytes": 271181,
+          "sha256": "37d7cd973e735dcc7930f3f742691199bc9ee25cd00d1d987e3c0c546f45ee83"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/athens/thumb/athens-working-interior.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 64981
+          "bytes": 64981,
+          "sha256": "8cd6ccff6a36152293f3c674f68be67eacbcf434342cbf5db16e0a51e3e042fa"
         }
       }
     },
@@ -361,19 +382,22 @@
           "path": "images/editorial/city-field-notes/athens/master/athens-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 588917
+          "bytes": 588917,
+          "sha256": "e10d4b5637a84f88c24462f9be05fec644876077a438ba602ca75f3b6f680917"
         },
         "web": {
           "path": "images/editorial/city-field-notes/athens/web/athens-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 120370
+          "bytes": 120370,
+          "sha256": "e52d762476b9e4ece911549d65c17e4d53bd585fe19e5f11864c340f4610fdc6"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/athens/thumb/athens-archival-evidence.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 29882
+          "bytes": 29882,
+          "sha256": "23ba44d914a6f81d30759e41b2d0df87d3c5e7c530f9ad25c2c5968dd75aa2ba"
         }
       }
     },
@@ -403,19 +427,22 @@
           "path": "images/editorial/city-field-notes/athens/master/athens-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 419875
+          "bytes": 419875,
+          "sha256": "1ca8e0d36a1c6a3ce66278a0da900040a858b2f06eb7b603ba1f98a3b4b4ba2d"
         },
         "web": {
           "path": "images/editorial/city-field-notes/athens/web/athens-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 263110
+          "bytes": 263110,
+          "sha256": "361005738a0e2f401fce5997c692ae009b03ba2de7a451c0aed92cfc5b61c349"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/athens/thumb/athens-maker-portrait.jpg",
           "width": 478,
           "height": 640,
-          "bytes": 66141
+          "bytes": 66141,
+          "sha256": "fdf6a2445cc7263cbbef1adf92ebe929094a05ae437cd10db38a16950b88b070"
         }
       }
     },
@@ -445,19 +472,22 @@
           "path": "images/editorial/city-field-notes/athens/master/athens-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 287640
+          "bytes": 287640,
+          "sha256": "8f597276f614a9a44bf931e238dda998e7e5a08f6356b656a5c9b4a37dfa8e79"
         },
         "web": {
           "path": "images/editorial/city-field-notes/athens/web/athens-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 166588
+          "bytes": 166588,
+          "sha256": "9ecf64484dff1eee1bdf60333bfad90fac029df6f1bb091fe936a542dee8ab83"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/athens/thumb/athens-nocturnal-aftermath.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 29266
+          "bytes": 29266,
+          "sha256": "8dd1688c7acd2e2da0cd60eab6b2de37adf74e381e86c3dfc01b2bf43995cf86"
         }
       }
     },
@@ -487,19 +517,22 @@
           "path": "images/editorial/city-field-notes/asheville/master/asheville-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 1078685
+          "bytes": 1078685,
+          "sha256": "3b44d0394a08b933b347da8c3701f59fbc840a6b8a0686c3dee817cfbbebad3c"
         },
         "web": {
           "path": "images/editorial/city-field-notes/asheville/web/asheville-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 328171
+          "bytes": 328171,
+          "sha256": "b79140cc79d116d41a18db9de62205b1c2210ae78f7116de43bc9efd972bedb9"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/asheville/thumb/asheville-street-field-note.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 61970
+          "bytes": 61970,
+          "sha256": "886b4276af5bfa3960511b131d2049620a49581daed56d1f4ed75d1c586f9c4d"
         }
       }
     },
@@ -529,19 +562,22 @@
           "path": "images/editorial/city-field-notes/asheville/master/asheville-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 934903
+          "bytes": 934903,
+          "sha256": "a3651ec34ac4f60a23fbe68c52380ab9def7748c8805884ac59fccf6d2c12593"
         },
         "web": {
           "path": "images/editorial/city-field-notes/asheville/web/asheville-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 253950
+          "bytes": 253950,
+          "sha256": "dbe78eff0e513f2f06c2c30538d10cb62b549d6fd7d15ececaea680323c43d99"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/asheville/thumb/asheville-working-interior.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 63183
+          "bytes": 63183,
+          "sha256": "b84d8ce10c3afa44d47fc8bc155ea03dfed4af485f40b95a4b8f65ae6893102b"
         }
       }
     },
@@ -571,19 +607,22 @@
           "path": "images/editorial/city-field-notes/asheville/master/asheville-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 816098
+          "bytes": 816098,
+          "sha256": "4820123b31a3e566809d87775c7fce9b5901eb5eb4d991a57d08776e8605ccc9"
         },
         "web": {
           "path": "images/editorial/city-field-notes/asheville/web/asheville-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 209518
+          "bytes": 209518,
+          "sha256": "0c2a1c0d0ffc08c0ab38cee80199aec895d10a8c092f95f5b72bf06ca7afb3d1"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/asheville/thumb/asheville-archival-evidence.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 50481
+          "bytes": 50481,
+          "sha256": "3c03997477e3b5cad9d37f539461d90fc77ab25359963daa47e8b13fd82a7bc7"
         }
       }
     },
@@ -613,19 +652,22 @@
           "path": "images/editorial/city-field-notes/asheville/master/asheville-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 432434
+          "bytes": 432434,
+          "sha256": "0e8665ec29cd3dcfdd696b5176bed57e52433ae941c9302b299c4fa38d4b5c72"
         },
         "web": {
           "path": "images/editorial/city-field-notes/asheville/web/asheville-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 267165
+          "bytes": 267165,
+          "sha256": "00730cc17905d1b70a4019bd9d40b87b7571307f55a9bf16a215123d64058334"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/asheville/thumb/asheville-maker-portrait.jpg",
           "width": 478,
           "height": 640,
-          "bytes": 66026
+          "bytes": 66026,
+          "sha256": "0eaea2ad8cc2703e087204b18ca645d548fc8150e5b280a91ec393f12586b186"
         }
       }
     },
@@ -655,19 +697,22 @@
           "path": "images/editorial/city-field-notes/asheville/master/asheville-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 936445
+          "bytes": 936445,
+          "sha256": "843523a9786de3d78f0d5f948da69c4a37bf562a74df8c3f613a4ead175cfbff"
         },
         "web": {
           "path": "images/editorial/city-field-notes/asheville/web/asheville-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 251617
+          "bytes": 251617,
+          "sha256": "af8f790246260c95d7d64d513f67bbd8868946ee605281504cd064a6c184569c"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/asheville/thumb/asheville-nocturnal-aftermath.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 43377
+          "bytes": 43377,
+          "sha256": "ab1eab894133f4a205aa275869573e3827f59d0b0280a3d5b69951a98b8c14a0"
         }
       }
     },
@@ -697,19 +742,22 @@
           "path": "images/editorial/city-field-notes/savannah/master/savannah-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 1017332
+          "bytes": 1017332,
+          "sha256": "e47339e2476562e01d8c481ccdcc6f7d3ac4a6e2e354c0c685b28e8595d45257"
         },
         "web": {
           "path": "images/editorial/city-field-notes/savannah/web/savannah-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 301797
+          "bytes": 301797,
+          "sha256": "3452b135134d43e80b1e2a0138913b17dea718b9b6805412d2b61a9fe04e8f20"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/savannah/thumb/savannah-street-field-note.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 58446
+          "bytes": 58446,
+          "sha256": "e7c6bc02c6bfd606cd0d38f7d6f766ef0fc9d7052bca88e73fcd56fcbc56029b"
         }
       }
     },
@@ -739,19 +787,22 @@
           "path": "images/editorial/city-field-notes/savannah/master/savannah-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 982487
+          "bytes": 982487,
+          "sha256": "29f6c3afe77926936cfd7223dc2551b2cff5dc282600b8a869226470eac5cb97"
         },
         "web": {
           "path": "images/editorial/city-field-notes/savannah/web/savannah-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 277128
+          "bytes": 277128,
+          "sha256": "66dc05737b38a7ad3809f9581d7f96a29810eeae007408499fa2d3d70bc6a032"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/savannah/thumb/savannah-working-interior.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 59504
+          "bytes": 59504,
+          "sha256": "a11a8aab9aeb638c598d49d51df8fd7a1e0be8798a9ebb38644b6dedae27067b"
         }
       }
     },
@@ -781,19 +832,22 @@
           "path": "images/editorial/city-field-notes/savannah/master/savannah-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 275647
+          "bytes": 275647,
+          "sha256": "19d5b1a0b573680cf4fb33a69bd02f0414a0e2afb449e7c09af39555f7de8d34"
         },
         "web": {
           "path": "images/editorial/city-field-notes/savannah/web/savannah-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 176604
+          "bytes": 176604,
+          "sha256": "634f021965263d0c859dc6898fe10a12abd195a56dc40539920f912da7b70a59"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/savannah/thumb/savannah-archival-evidence.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 47321
+          "bytes": 47321,
+          "sha256": "49538b4a90417f70ceaeabf84f0dea5731cda43167e15ce7deb0e6f75b045d46"
         }
       }
     },
@@ -823,19 +877,22 @@
           "path": "images/editorial/city-field-notes/savannah/master/savannah-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 368859
+          "bytes": 368859,
+          "sha256": "b6d161f9dae915d8be0a1cbaa2d036b4dd66ced59bd5fc92e2594afb534546e2"
         },
         "web": {
           "path": "images/editorial/city-field-notes/savannah/web/savannah-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 216699
+          "bytes": 216699,
+          "sha256": "c0977130a55197aa392ed1f4cf4dffa935e48beb0d031300dbbfb894ac54dee4"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/savannah/thumb/savannah-maker-portrait.jpg",
           "width": 478,
           "height": 640,
-          "bytes": 51233
+          "bytes": 51233,
+          "sha256": "0791074762720847f85934c07a47afc01363ad7c0e41910fcf74611a8b136493"
         }
       }
     },
@@ -865,19 +922,22 @@
           "path": "images/editorial/city-field-notes/savannah/master/savannah-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 370994
+          "bytes": 370994,
+          "sha256": "8fd754215ad2608bd26ab83ae7b82b213959673d93a81466372dfeb12c6e918e"
         },
         "web": {
           "path": "images/editorial/city-field-notes/savannah/web/savannah-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 228817
+          "bytes": 228817,
+          "sha256": "923bfeb24e71ebed3d4dd9ccf7a30c8985293ad793e819ad7ceea685fdb576dc"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/savannah/thumb/savannah-nocturnal-aftermath.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 40083
+          "bytes": 40083,
+          "sha256": "5632072346c551b7e7d5f377ee335fac29927b995e0964e126ae0ae5ac156ca7"
         }
       }
     },
@@ -907,19 +967,22 @@
           "path": "images/editorial/city-field-notes/richmond/master/richmond-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 1004424
+          "bytes": 1004424,
+          "sha256": "8fcc376c732d75665ebdcc8177adae11074f59236da7e5abdd6ab3c4a9035ca4"
         },
         "web": {
           "path": "images/editorial/city-field-notes/richmond/web/richmond-street-field-note.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 291368
+          "bytes": 291368,
+          "sha256": "3b03c5de12357d6abed8a6121f5e5642b826d927cbf00e3800f5518fb9c2bdc7"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/richmond/thumb/richmond-street-field-note.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 51123
+          "bytes": 51123,
+          "sha256": "6ba4724b8498c79e84f6705ebfc9c4a2500bf3d3e7ce295220daee83fc7e916d"
         }
       }
     },
@@ -949,19 +1012,22 @@
           "path": "images/editorial/city-field-notes/richmond/master/richmond-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 900673
+          "bytes": 900673,
+          "sha256": "d7af88d35974977c44c6a7ca203bf3b8acde18fd9d95992580ed556d2b764701"
         },
         "web": {
           "path": "images/editorial/city-field-notes/richmond/web/richmond-working-interior.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 239378
+          "bytes": 239378,
+          "sha256": "b5aed91f5cffcbc6e042ced176e3246742e64029d755900f99091e2a29c9d9ad"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/richmond/thumb/richmond-working-interior.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 58678
+          "bytes": 58678,
+          "sha256": "48bc344596219d139bcfa32122ce59dee2d8cdea873d6359ce1f66d277f9844e"
         }
       }
     },
@@ -991,19 +1057,22 @@
           "path": "images/editorial/city-field-notes/richmond/master/richmond-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 814940
+          "bytes": 814940,
+          "sha256": "bff7a86495190cae266331a1a7fdb076f0d22b9838781a5f1a167ff2560b42db"
         },
         "web": {
           "path": "images/editorial/city-field-notes/richmond/web/richmond-archival-evidence.jpg",
           "width": 1200,
           "height": 896,
-          "bytes": 205169
+          "bytes": 205169,
+          "sha256": "2a830fab940ea70ad7998d6f330afe0b942833c804fcabd6d7aa9709449c8c04"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/richmond/thumb/richmond-archival-evidence.jpg",
           "width": 640,
           "height": 478,
-          "bytes": 47683
+          "bytes": 47683,
+          "sha256": "2de2647551e6faaf84c9d52b04274a221514ef677a6bf88e5811a9a07bdb7b36"
         }
       }
     },
@@ -1033,19 +1102,22 @@
           "path": "images/editorial/city-field-notes/richmond/master/richmond-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 471037
+          "bytes": 471037,
+          "sha256": "c34481e5901a1512bc9f7eb6f5d6fed707fd5a5cdd13e107dbe117a634c1b0d5"
         },
         "web": {
           "path": "images/editorial/city-field-notes/richmond/web/richmond-maker-portrait.jpg",
           "width": 896,
           "height": 1200,
-          "bytes": 292450
+          "bytes": 292450,
+          "sha256": "aca0dd19fc04514cfac921a5d65f35d307d002353c592ce47ba8cfb585635eea"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/richmond/thumb/richmond-maker-portrait.jpg",
           "width": 478,
           "height": 640,
-          "bytes": 66853
+          "bytes": 66853,
+          "sha256": "d36c378faef482f8813c4a4463d0bce2f97f295d1bafcd74fd3070b2216445e5"
         }
       }
     },
@@ -1075,19 +1147,22 @@
           "path": "images/editorial/city-field-notes/richmond/master/richmond-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 373287
+          "bytes": 373287,
+          "sha256": "1e4e8606bea070116e22a39cf738d223441d8a7c85b2985d405c03570e3315f3"
         },
         "web": {
           "path": "images/editorial/city-field-notes/richmond/web/richmond-nocturnal-aftermath.jpg",
           "width": 1376,
           "height": 768,
-          "bytes": 225501
+          "bytes": 225501,
+          "sha256": "a61273b089e35d794f44bb2e11f2dd407c91d808ebf76d3b365120e6985aa8c0"
         },
         "thumb": {
           "path": "images/editorial/city-field-notes/richmond/thumb/richmond-nocturnal-aftermath.jpg",
           "width": 640,
           "height": 357,
-          "bytes": 37211
+          "bytes": 37211,
+          "sha256": "5e1d68d61940972fc9c8cdf6f79ef2217ec0eba4a78d6149613e76b5747853bc"
         }
       }
     }

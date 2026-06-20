@@ -56,7 +56,13 @@ The design is intentionally lightweight and framework-free. It uses semantic HTM
 
 Additional image direction: [`docs/CITY_IMAGE_PROMPTS.md`](docs/CITY_IMAGE_PROMPTS.md) contains five tightly constrained image families for five Southern bohemian cities.
 
-The generated collection is managed through [`assets/catalog.json`](assets/catalog.json), documented in [`assets/README.md`](assets/README.md), and browsable at `asset-library.html`. Run `python scripts/build_asset_library.py` after adding or replacing approved masters.
+The generated collection is managed through [`assets/catalog.json`](assets/catalog.json), while standalone runtime media is tracked in [`assets/site-assets.json`](assets/site-assets.json). Both are documented in [`assets/README.md`](assets/README.md), and the editorial collection is browsable at `asset-library.html`.
+
+```sh
+python scripts/build_asset_library.py
+python scripts/build_site_asset_inventory.py
+python scripts/check_assets.py
+```
 
 ## Local preview
 

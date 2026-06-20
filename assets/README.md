@@ -1,6 +1,9 @@
-# RICE Asset Library
+# RICE Asset Management
 
-The asset library separates editorial images into three delivery tiers and records their provenance in one generated catalog.
+RICE has two deliberately separate inventories:
+
+- `catalog.json` records accessioned editorial collections, provenance, prompts, and delivery tiers.
+- `site-assets.json` records standalone runtime media such as the logo, noise texture, splash video, poster, and section features.
 
 ## Directory system
 
@@ -45,13 +48,20 @@ Every entry in [`catalog.json`](catalog.json) includes:
 - alt text and responsive focal point;
 - rights, provenance, model, generation date, and AI disclosure;
 - the production prompt and its source manifest.
+- SHA-256 checksums for every master and derivative.
+
+Every entry in [`site-assets.json`](site-assets.json) includes a stable ID, role, known consumers, dimensions where applicable, byte size, and SHA-256 checksum.
 
 ## Workflow
 
 1. Put an approved source image in its city’s `master/` folder.
 2. Add or update its prompt record in `docs/city-image-prompts.json`.
 3. Run `python scripts/build_asset_library.py`.
-4. Review `asset-library.html` through a local web server.
-5. Reference the `web` path in site pages; reserve `master` for print or reprocessing.
+4. If a standalone file under `images/` changed, run `python scripts/build_site_asset_inventory.py`.
+5. Run `python scripts/check_assets.py`.
+6. Review `asset-library.html` through a local web server.
+7. Reference the `web` path in site pages; reserve `master` for print or reprocessing.
+
+Do not add an untracked file directly under `images/`: add its ownership metadata to `scripts/build_site_asset_inventory.py`, rebuild the inventory, and check it. Editorial collection files belong under `images/editorial/`, not in the standalone inventory.
 
 Generated archival imagery must always retain its disclosure and must never be represented as an authenticated historical record.
