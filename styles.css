@@ -948,6 +948,15 @@ body.splash::before {
   transform: scale(1.025);
 }
 
+.feature-strip-item:hover figcaption strong,
+.feature-strip-item:focus-within figcaption strong {
+  padding-inline: 0.12em;
+  background: var(--acid);
+  color: var(--ink);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 .feature-strip-item figcaption {
   position: absolute;
   inset: 0.8rem 0.8rem auto auto;
@@ -1064,8 +1073,9 @@ body.splash::before {
   max-width: 44ch;
 }
 
-.section-record:hover {
-  background: rgba(9, 9, 9, 0.045);
+.section-record:hover,
+.section-record:focus-within {
+  background: linear-gradient(90deg, transparent 0 4%, var(--acid) 4% 100%);
 }
 
 .article-header.editorial {

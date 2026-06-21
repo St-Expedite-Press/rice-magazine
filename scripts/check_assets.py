@@ -38,19 +38,10 @@ def check_file(record: dict, label: str) -> None:
 def main() -> None:
     editorial = json.loads((ROOT / "assets" / "catalog.json").read_text(encoding="utf-8"))
     site = json.loads((ROOT / "assets" / "site-assets.json").read_text(encoding="utf-8"))
-    prompt_paths = [
-        ROOT / "docs" / "city-image-prompts.json",
-        ROOT / "docs" / "city-intimate-prompts.json",
-    ]
-    prompts = [json.loads(path.read_text(encoding="utf-8")) for path in prompt_paths]
+    prompts = json.loads((ROOT / "docs" / "city-image-prompts.json").read_text(encoding="utf-8"))
     prompt_records = {
-        (city["slug"], image["role"]): {
-            "prompt": image["prompt"],
-            "model": manifest["model"],
-            "disclosure": manifest["disclosure"],
-        }
-        for manifest in prompts
-        for city in manifest["cities"]
+        (city["slug"], image["role"]): image["prompt"]
+        for city in prompts["cities"]
         for image in city["images"]
     }
 
@@ -60,13 +51,9 @@ def main() -> None:
             raise RuntimeError(f"Duplicate asset ID: {asset['id']}")
         ids.add(asset["id"])
         prompt_key = (asset["city_slug"], asset["role"])
-        prompt_record = prompt_records.get(prompt_key)
-        if not prompt_record or prompt_record["prompt"] != asset["prompt"]:
+        if prompt_records.get(prompt_key) != asset["prompt"]:
             raise RuntimeError(f"{asset['id']}: prompt metadata is out of date")
-        if (
-            asset["model"] != prompt_record["model"]
-            or asset["disclosure"] != prompt_record["disclosure"]
-        ):
+        if asset["model"] != prompts["model"] or asset["disclosure"] != prompts["disclosure"]:
             raise RuntimeError(f"{asset['id']}: generation metadata is out of date")
         for tier in ("master", "web", "thumb"):
             check_file(asset["files"][tier], f"{asset['id']} {tier}")
