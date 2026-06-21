@@ -573,147 +573,16 @@ body.splash::before {
   pointer-events: none;
 }
 
-.splash-mark {
-  position: relative;
-  width: min(100%, 20rem);
-}
-
-.splash-publisher {
-  position: absolute;
-  top: -0.35rem;
-  left: 0;
-  z-index: 2;
-  width: 100%;
+.splash-container h1 {
   margin: 0;
-  color: var(--ink);
-  font: 700 var(--type-micro)/1 "Courier New", monospace;
-  letter-spacing: 0.18em;
-  opacity: 0;
-  text-transform: uppercase;
-  transform: translateY(0.25rem);
-  animation: neon-publisher-settle 700ms 3.15s ease-out forwards;
-}
-
-.splash-logo {
-  position: relative;
-  display: grid;
-  width: 100%;
-  aspect-ratio: 320 / 176;
-  place-items: center;
-  margin: 0;
-}
-
-.splash-logo-ring {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  fill: none;
-}
-
-.neon-ring-base,
-.neon-ring-part {
-  vector-effect: non-scaling-stroke;
-}
-
-.neon-ring-base {
-  stroke: rgba(17, 17, 17, 0.3);
-  stroke-width: 2;
-}
-
-.neon-ring-part {
-  stroke: #f7ffd2;
-  stroke-linecap: round;
-  stroke-width: 3;
-  opacity: 0.08;
-  filter:
-    drop-shadow(0 0 1px var(--ink))
-    drop-shadow(0 0 4px var(--acid))
-    drop-shadow(0 0 9px rgba(217, 255, 0, 0.72));
-  animation: neon-part-ignite 2.1s steps(1, end) forwards;
-}
-
-.ring-part-one {
-  animation-delay: 80ms;
-}
-
-.ring-part-two {
-  animation-delay: 420ms;
-}
-
-.ring-part-three {
-  animation-delay: 190ms;
-}
-
-.ring-part-four {
-  animation-delay: 650ms;
-}
-
-.splash-logo-letters {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
   font-family: "Arial Black", Arial, sans-serif;
   font-size: clamp(3.6rem, 2.3rem + 6vw, 5.75rem);
   line-height: 0.9;
   letter-spacing: -0.07em;
 }
 
-.neon-letter {
-  color: #f7ffd2;
-  opacity: 0.08;
-  -webkit-text-stroke: 1px var(--ink);
-  text-shadow:
-    0 0 1px var(--ink),
-    0 0 4px var(--acid),
-    0 0 10px rgba(217, 255, 0, 0.78),
-    0 0 18px rgba(217, 255, 0, 0.42);
-  animation: neon-letter-ignite 1.85s steps(1, end) forwards;
-}
-
-.letter-r {
-  animation-delay: 310ms;
-}
-
-.letter-i {
-  animation-delay: 880ms;
-}
-
-.letter-c {
-  animation-delay: 540ms;
-}
-
-.letter-e {
-  animation-delay: 1.08s;
-}
-
-@keyframes neon-part-ignite {
-  0%, 12%, 20%, 34% { opacity: 0.08; }
-  13%, 19%, 35%, 46% { opacity: 1; }
-  47%, 55% { opacity: 0.2; }
-  56%, 100% { opacity: 1; }
-}
-
-@keyframes neon-letter-ignite {
-  0%, 10%, 18%, 31%, 44% { opacity: 0.08; }
-  11%, 17%, 32%, 43%, 45%, 59% { opacity: 1; }
-  60%, 68% { opacity: 0.22; }
-  69%, 100% { opacity: 1; }
-}
-
-@keyframes neon-publisher-settle {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    text-shadow: 0 0 5px rgba(217, 255, 0, 0.45);
-  }
-}
-
 .splash-tagline {
-  margin: 0.55rem 0 0;
+  margin: 0.8rem 0 0;
   font: 700 var(--type-meta)/1.4 "Courier New", monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -863,28 +732,22 @@ body.splash::before {
   }
 
   .splash-container {
-    width: min(calc(100vw - 1rem), 370px);
-    padding: 1.25rem;
+    width: min(82vw, 340px);
+    padding: 1.5rem;
   }
 
-  .splash-mark {
-    width: clamp(10.5rem, 55vw, 14rem);
-  }
-
-  .splash-logo-letters {
+  .splash-container h1 {
     font-size: clamp(3.15rem, 15vw, 4.25rem);
   }
 
   .splash-actions {
     width: 100%;
     flex-direction: column;
-    gap: 0.45rem;
-    margin-top: 1rem;
+    margin-top: 1.35rem;
   }
 
   .splash-btn {
     width: 100%;
-    padding-block: 0.6rem;
   }
 
   .splash-signup {
@@ -898,7 +761,7 @@ body.splash::before {
     padding: 1rem;
   }
 
-  .splash-logo-letters {
+  .splash-container h1 {
     font-size: clamp(2.85rem, 13vh, 4.5rem);
   }
 
@@ -933,14 +796,6 @@ body.splash::before {
 
   body.page-entering main {
     animation: none;
-  }
-
-  .splash-publisher,
-  .neon-ring-part,
-  .neon-letter {
-    animation: none;
-    opacity: 1;
-    transform: none;
   }
 }
 
