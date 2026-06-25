@@ -2,6 +2,24 @@
 
 This file governs all work under `rice_site/`. The repository is the standalone RICE Magazine static site. It is independent of the sibling St. Expedite Press repository: do not import sibling code, assets, packages, deployment assumptions, or Git history unless the user explicitly requests an integration.
 
+## Session start loop
+
+1. Read this file in full.
+2. Read `ONTOLOGY.md` for navigation, source ownership, update coupling, and validation commands.
+3. Read the last relevant entries in `MEMORY.md`.
+4. If working under `assets/`, `docs/`, `images/`, or `scripts/`, read that directory's local `AGENTS.md` and `MEMORY.md`.
+5. Confirm the current worktree status with `git status -sb` before editing.
+
+## Closeout loop
+
+Every file-changing task must end by:
+
+- running the narrowest meaningful checks;
+- appending a concise entry to project `MEMORY.md`;
+- appending to a local `MEMORY.md` when the touched directory has one;
+- assessing whether scripts, skills, runbooks, `AGENTS.md`, or `ONTOLOGY.md` need updates;
+- updating ontology or guidance in the same change when paths, ownership, commands, or generated-file rules changed.
+
 ## Agent orchestration
 
 The primary agent is the orchestrator and keeps minimal context: the goal, governing instructions, decisions, interfaces, and verified conclusions.

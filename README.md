@@ -1,5 +1,14 @@
 # RICE Magazine
 
+## Agent framework
+
+- `AGENTS.md` defines repository behavior, validation, secrets, and closeout rules.
+- `ONTOLOGY.md` maps source ownership, generated files, update coupling, and validation commands.
+- `MEMORY.md` records durable project changes, checks, follow-ups, and tooling notes.
+- Local `AGENTS.md` and `MEMORY.md` files exist under `assets/`, `docs/`, `images/`, and `scripts/` for scoped work.
+
+Every file-changing task should update the relevant memory file and assess whether scripts, tooling, skills, or ontology need to change.
+
 RICE is an independent literary magazine of essays, fiction, poetry, and archival work from the Gulf South. This repository contains the magazine’s static website and the design system for its first volume.
 
 ![RICE splash page over a rice field at golden hour](docs/screenshots/splash-desktop.png)
@@ -81,3 +90,11 @@ Then open:
 
 [St. Expedite Press](https://stexpedite.press) · New Orleans, Louisiana  
 29.9511° N, 90.0715° W
+## Agent framework
+
+- `AGENTS.md` defines repository behavior, validation, secrets, and closeout rules.
+- `ONTOLOGY.md` maps source ownership, generated files, update coupling, and validation commands.
+- `MEMORY.md` records durable project changes, checks, follow-ups, and tooling notes.
+- Local `AGENTS.md` and `MEMORY.md` files exist under `assets/`, `docs/`, `images/`, and `scripts/` for scoped work.
+
+Every file-changing task should update the relevant memory file and assess whether scripts, tooling, skills, or ontology need to change.
