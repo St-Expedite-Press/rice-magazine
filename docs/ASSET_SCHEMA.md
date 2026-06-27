@@ -28,6 +28,15 @@ The category is also the **on-disk layout**: served images live in
 `assets/images/<category>/` (one web rendition each), and masters in
 `assets/masters/<category>/`. The category is the only sub-directory dimension.
 
+> **Two `category` axes.** This image-slot taxonomy is distinct from the *work*
+> taxonomy that classifies articles (see [Works](#works--assetsarticlesjson)).
+> They share some labels but answer different questions — an image's category
+> routes its placement; a work's category names its content type.
+
+**`place`** is the shared geographic field. Images carry `place`/`place_slug`
+(renamed from `city`/`city_slug`); articles carry `place` (was the informal
+"parish"). Same field name, one concept, both sides.
+
 ## Current mapping
 
 ### Editorial collection — `assets/catalog.json`
@@ -86,9 +95,30 @@ Driven by the `ASSETS` map in [`../scripts/build_site_asset_inventory.py`](../sc
 each load. Slots bound to a specific article or element stay fixed. See
 [`PHOTO_SLOTS.md`](PHOTO_SLOTS.md).
 
+## Works — `assets/articles.json`
+
+Articles (works) have their own data model and **work taxonomy** (`ARTICLE_CATEGORIES`
+in `asset_categories.py`), separate from the image-slot taxonomy above:
+
+| Work category | Meaning |
+|---|---|
+| `article` | Essay or non-fiction prose. |
+| `fiction` | Short fiction or prose narrative. |
+| `poetry` | Poems and poem sequences. |
+| `photo` | Photo essays or standalone photographic work. *(Reserved — no works yet.)* |
+| `archive` | Archival records, documents, and field evidence. |
+
+Each work record carries: `id`, `title`, `category` (above), `place`, `author`,
+`date`, `description` (one sentence), `keywords`, `ref` (file id / folio / accession),
+`href`, and `hero` (a bound image path or `null`). `assets/articles.json` is the
+**source of truth**: `site.js` builds the search index from it (no hardcoded list),
+and `check_assets.py` validates ids, categories, required fields, and that `href`
+and `hero` resolve. Add or edit a work there, then run `check_assets.py`.
+
 ## Notes
 
-- Adding a new category means editing `CATEGORIES` once in `asset_categories.py`.
+- Adding a new image category means editing `CATEGORIES`, and a new work category
+  means editing `ARTICLE_CATEGORIES` — both once, in `asset_categories.py`.
 - Media files are recognized by extension (`MEDIA_SUFFIXES`); companion files such
   as `AGENTS.md` / `MEMORY.md` under `assets/images/` are ignored by the inventory.
 - `check_assets.py` rejects any orphan served file (one not covered by an inventory).

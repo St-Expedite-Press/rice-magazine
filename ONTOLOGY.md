@@ -11,8 +11,9 @@ This file is the navigation contract for `rice_site/`. Read it after `AGENTS.md`
 | Site behavior | `site.js` | Dependency-free interaction layer for reading/search/archive behavior. |
 | Asset browser | `asset-library.html`, `asset-library.css`, `asset-library.js` | Internal browser for editorial image assets. |
 | Asset metadata | `assets/catalog.json`, `assets/site-assets.json` | Generated or maintained inventories; do not hand-edit generated measurements. Each asset carries a `category` (`archive`/`article`/`feature`/`photo`/`system`). |
-| Asset category schema | `docs/ASSET_SCHEMA.md`, `scripts/asset_categories.py` | Canonical category definitions and mapping. `asset_categories.py` is the single source of truth imported by both builders and the validator. |
+| Taxonomy source of truth | `scripts/asset_categories.py`, `docs/ASSET_SCHEMA.md` | Two axes: `CATEGORIES` (image slot taxonomy) and `ARTICLE_CATEGORIES` (work taxonomy). Imported by builders and the validator. `place` (was image `city`/article "parish") is the shared geographic field. |
 | Photo-slot map | `assets/photo-slots.json`, `docs/PHOTO_SLOTS.md` | Every rendered image/media slot, the category it draws from, and its caption metadata. `check_assets.py` enforces that each slot's image category equals the slot's category. |
+| Article data model | `assets/articles.json` | Source of truth for editorial works: `id`, `title`, `category` (work type), `place`, `author`, `date`, `description`, `keywords`, `ref`, `href`, `hero`. `site.js` builds the search index from it; `check_assets.py` validates it. |
 | Served images | `assets/images/<category>/` | One web rendition per image; the only sub-directories are the five categories. Generated for editorial; placed directly for standalone. |
 | Image masters | `assets/masters/<category>/` | Original editorial masters (unreferenced by the site). `_incoming/` holds unpromoted candidates. |
 | Runtime image pools | `assets/image-pools.json` | Generated: `category -> [{src, alt, caption, tags, focal_point}]` for randomizable categories (archive, photo). `site.js` fetches it to fill random slots. |
@@ -35,6 +36,7 @@ Root HTML, `styles.css`, `site.js`, and `asset-library.*` remain governed by the
 - If image masters or prompt records change, rebuild the asset library, site-asset inventory, and image pools, then run `scripts/check_assets.py`.
 - If categories change, edit `scripts/asset_categories.py` (and the role/asset maps in the builders), update `docs/ASSET_SCHEMA.md`, then rebuild and check. Do not hand-add a `category` to a JSON file.
 - If a page's image slot changes (added, removed, re-pointed, or made random), mirror it in `assets/photo-slots.json` and `docs/PHOTO_SLOTS.md`, then run `scripts/check_assets.py`; a fixed slot's image category must equal the slot's category, and a random slot's `pool` must be a non-empty category in `image-pools.json`.
+- If a work is added/changed, edit `assets/articles.json` (the source of truth — `site.js` search reads it); use a `category` from `ARTICLE_CATEGORIES` and a `place`, then run `scripts/check_assets.py`. Do not re-add works to a hardcoded list in `site.js`.
 - If served renditions, generated dimensions, or catalog measurements appear to need edits, change the master or generator instead. Masters live in `assets/masters/<category>/`; served web files in `assets/images/<category>/`.
 - If routes, filenames, asset ownership, validation commands, or working-directory responsibilities change, update `AGENTS.md`, this `ONTOLOGY.md`, and the relevant `MEMORY.md`.
 - If tooling or skills fail, add a concise tooling note to `MEMORY.md` and update the affected script, guide, or runbook when the fix is clear.

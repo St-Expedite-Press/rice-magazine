@@ -5,7 +5,7 @@
 - `AGENTS.md` defines repository behavior, validation, secrets, and closeout rules.
 - `ONTOLOGY.md` maps source ownership, generated files, update coupling, and validation commands.
 - `MEMORY.md` records durable project changes, checks, follow-ups, and tooling notes.
-- Local `AGENTS.md` and `MEMORY.md` files exist under `assets/`, `docs/`, `images/`, and `scripts/` for scoped work.
+- Local `AGENTS.md` and `MEMORY.md` files exist under `assets/`, `assets/images/`, `docs/`, and `scripts/` for scoped work.
 
 Every file-changing task should update the relevant memory file and assess whether scripts, tooling, skills, or ontology need to change.
 
@@ -60,16 +60,19 @@ The design is intentionally lightweight and framework-free. It uses semantic HTM
 - `archive.html`, `archive-template.html` — archival material and field-card format
 - `about.html`, `submissions.html`, `shop.html` — magazine information and calls to action
 - `styles.css` — shared visual system and responsive behavior
-- `site.js` — search, reading mode, archive filters, zoom, and form states
+- `site.js` — search (built from `assets/articles.json`), reading mode, archive filters, random archive slots, zoom, and form states
 - [`docs/IMAGE_STYLE_GUIDE.md`](docs/IMAGE_STYLE_GUIDE.md) — C86 × South × St. Expedite Press image direction, prompt presets, and archive ethics
 
 Additional image direction: [`docs/CITY_IMAGE_PROMPTS.md`](docs/CITY_IMAGE_PROMPTS.md) contains five tightly constrained image families for five Southern bohemian cities.
 
-The generated collection is managed through [`assets/catalog.json`](assets/catalog.json), while standalone runtime media is tracked in [`assets/site-assets.json`](assets/site-assets.json). Both are documented in [`assets/README.md`](assets/README.md), and the editorial collection is browsable at `asset-library.html`.
+Images are categorized assets: served web renditions live in `assets/images/<category>/` (the only sub-directories are the five categories — `archive`, `article`, `feature`, `photo`, `system`) and masters in `assets/masters/<category>/`. The editorial collection is managed through [`assets/catalog.json`](assets/catalog.json), standalone runtime media in [`assets/site-assets.json`](assets/site-assets.json), random-slot pools in [`assets/image-pools.json`](assets/image-pools.json), and slot bindings in [`assets/photo-slots.json`](assets/photo-slots.json). Editorial **works** (essays, fiction, poetry, archive) are modeled in [`assets/articles.json`](assets/articles.json), which `site.js` uses to build the search index.
+
+The category taxonomies and the shared `place` field are defined in [`scripts/asset_categories.py`](scripts/asset_categories.py) and documented in [`docs/ASSET_SCHEMA.md`](docs/ASSET_SCHEMA.md). Inventories are documented in [`assets/README.md`](assets/README.md), and the editorial collection is browsable at `asset-library.html`.
 
 ```sh
 python scripts/build_asset_library.py
 python scripts/build_site_asset_inventory.py
+python scripts/build_image_pools.py
 python scripts/check_assets.py
 ```
 
@@ -95,6 +98,6 @@ Then open:
 - `AGENTS.md` defines repository behavior, validation, secrets, and closeout rules.
 - `ONTOLOGY.md` maps source ownership, generated files, update coupling, and validation commands.
 - `MEMORY.md` records durable project changes, checks, follow-ups, and tooling notes.
-- Local `AGENTS.md` and `MEMORY.md` files exist under `assets/`, `docs/`, `images/`, and `scripts/` for scoped work.
+- Local `AGENTS.md` and `MEMORY.md` files exist under `assets/`, `assets/images/`, `docs/`, and `scripts/` for scoped work.
 
 Every file-changing task should update the relevant memory file and assess whether scripts, tooling, skills, or ontology need to change.

@@ -15,6 +15,15 @@ Entry format:
 
 ---
 
+## 2026-06-27 — Project — Article data model + place rename + work taxonomy
+
+**Changed:** Started systematizing a work data model. New `assets/articles.json` (8 works: id, title, `category` [work type], place, author, date, description, keywords, ref, href, hero) is now the source of truth for editorial works; `site.js` builds its search index from it at runtime (replaced the hardcoded `RICE_INDEX`; baseline = About/Submissions, fallback-safe). Added a second taxonomy `ARTICLE_CATEGORIES` (article/fiction/poetry/photo/archive) to `asset_categories.py` alongside image `CATEGORIES`. Renamed the image geographic field `city`/`city_slug` → `place`/`place_slug` (catalog + build + asset-library filter "City→Place" + check prompt cross-ref); added `place` to the archive-ledger standalone. Renamed visible "parish" labels → "place" (archive.html aside, archive-template dl, search placeholder). `check_assets.py` gained `check_articles()` (ids, category, required fields, href/hero resolve). Updated ASSET_SCHEMA (Works section + two-axis + place note), ONTOLOGY, README.md, assets/README, both AGENTS.
+**Checks:** `check_assets.py` PASS (25 editorial, 12 site, 28 slots, 8 articles, pools archive=11); `node --check` both JS OK; node search-index map returns 8 works; no stale `city_slug`/`RICE_INDEX` refs (remaining `city_slug` is the prompt-manifest input variable only).
+**Follow-ups:** `photo` work category reserved (no works). Article `date`/`hero` are null for several works; place values for non-parish works ("Delta interior", "Gulf interior") are editorial judgment — refine as desired. Section/template pages still carry their own metadata in HTML; could later render from articles.json.
+**Tooling notes:** Two `category` axes (image-slot vs work) intentionally coexist — different concepts, same word, documented in ASSET_SCHEMA. `place` is the shared geographic field across images and articles.
+
+---
+
 ## 2026-06-27 — Project — Images relocated to assets/images/<category>/ + random archive slots
 
 **Changed:** Major asset restructure. Moved all images under `assets/` organized only by category: served web renditions in `assets/images/<category>/` (one rendition each, thumb tier dropped), masters in `assets/masters/<category>/` (`_incoming/` holds the unpromoted field-notes-batch). Old `images/` tree deleted. Rewrote `build_asset_library.py` (reads masters/<cat>, writes images/<cat>, files={web,master}, emits per-asset caption/tags) and `build_site_asset_inventory.py` (repathed, scans assets/images minus editorial); new `build_image_pools.py` emits `assets/image-pools.json` for randomizable categories. `check_assets.py` now reconciles all served files (no orphans), validates pools, and validates random slots. Repathed ~46 refs across HTML/CSS + JSON. `site.js` gained `randomizeImageSlots()`: the 4 archive grid cards (`data-random="archive"`) draw random pool images per load, caption follows image; static fallback for no-JS. asset-library uses web (not thumb). Updated ONTOLOGY, both AGENTS.md, assets/README, ASSET_SCHEMA, PHOTO_SLOTS, relocated images AGENTS.

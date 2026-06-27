@@ -1,5 +1,14 @@
 # RICE Assets Memory
 
+## 2026-06-27 — Assets — articles.json data model + place rename
+
+**Changed:** New `articles.json` (8 works: id, title, category[work type], place, author, date, description, keywords, ref, href, hero) — hand-authored source of truth, validated by check_assets. Renamed image `city`/`city_slug` → `place`/`place_slug` in `catalog.json`; added `place` to the archive-ledger entry in `site-assets.json`. `README.md` updated.
+**Checks:** `python ../scripts/check_assets.py` PASS (8 articles; href/hero resolve).
+**Follow-ups:** photo work category empty; some `date`/`hero` null.
+**Tooling notes:** `place` is shared across images and articles; article `category` (work type) is a separate axis from image `category` (slot).
+
+---
+
 ## 2026-06-27 — Assets — Category-organized image tree + pools
 
 **Changed:** Images now live under `assets/`: served renditions in `images/<category>/` (one web file each), masters in `masters/<category>/` (+ `_incoming/`). New `image-pools.json` (generated) lists archive/photo pool images for runtime random slots. `catalog.json` files block is now `{web, master}` (no thumb) and each asset carries `caption`/`tags`; `site-assets.json` repathed with caption/tags on the archive entry. `README.md` updated for the new layout/workflow. Relocated `images/AGENTS.md` + `MEMORY.md` to `assets/images/`.

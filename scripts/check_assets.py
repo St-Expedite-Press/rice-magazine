@@ -8,7 +8,7 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
-from asset_categories import is_media, validate_category
+from asset_categories import is_media, validate_article_category, validate_category
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -68,6 +68,33 @@ def check_image_pools(category_of: dict) -> str:
                 )
         summary.append(f"{category}={len(entries)}")
     return ", ".join(summary)
+
+
+def check_articles(category_of: dict) -> int:
+    """Validate the article data model (assets/articles.json)."""
+    path = ROOT / "assets" / "articles.json"
+    if not path.is_file():
+        return 0
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    seen: set[str] = set()
+    for article in manifest["articles"]:
+        aid = article["id"]
+        if aid in seen:
+            raise RuntimeError(f"Duplicate article ID: {aid}")
+        seen.add(aid)
+        validate_article_category(article["category"], f"article {aid}")
+        for field in ("title", "place", "description", "href"):
+            if not article.get(field):
+                raise RuntimeError(f"article {aid}: missing required field '{field}'")
+        if not (ROOT / article["href"]).is_file():
+            raise RuntimeError(f"article {aid}: href target missing ({article['href']})")
+        hero = article.get("hero")
+        if hero is not None:
+            if not (ROOT / hero).is_file():
+                raise RuntimeError(f"article {aid}: hero image missing ({hero})")
+            if hero not in category_of:
+                raise RuntimeError(f"article {aid}: hero {hero} is not in any image inventory")
+    return len(manifest["articles"])
 
 
 def check_photo_slots(editorial: dict, site: dict) -> int:
@@ -130,7 +157,7 @@ def main() -> None:
             raise RuntimeError(f"Duplicate asset ID: {asset['id']}")
         ids.add(asset["id"])
         validate_category(asset.get("category", ""), asset["id"])
-        prompt_key = (asset["city_slug"], asset["role"])
+        prompt_key = (asset["place_slug"], asset["role"])
         if prompt_records.get(prompt_key) != asset["prompt"]:
             raise RuntimeError(f"{asset['id']}: prompt metadata is out of date")
         if asset["model"] != prompts["model"] or asset["disclosure"] != prompts["disclosure"]:
@@ -162,11 +189,12 @@ def main() -> None:
     category_of = image_category_index(editorial, site)
     pool_summary = check_image_pools(category_of)
     slot_count = check_photo_slots(editorial, site)
+    article_count = check_articles(category_of)
 
     print(
         f"[check-assets] PASS: {len(editorial['assets'])} editorial assets, "
         f"{len(site['assets'])} standalone site assets, "
-        f"{slot_count} photo slots, pools [{pool_summary}]"
+        f"{slot_count} photo slots, {article_count} articles, pools [{pool_summary}]"
     )
 
 

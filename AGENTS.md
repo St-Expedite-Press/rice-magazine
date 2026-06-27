@@ -55,7 +55,8 @@ RICE is framework-free and dependency-light. Preserve semantic HTML, keyboard fo
 | Standalone site-media inventory | `assets/site-assets.json` |
 | Photo-slot map | `assets/photo-slots.json` |
 | Runtime random-image pools | `assets/image-pools.json` |
-| Category source of truth | `scripts/asset_categories.py`, `docs/ASSET_SCHEMA.md` |
+| Article (work) data model | `assets/articles.json` |
+| Taxonomy source of truth | `scripts/asset_categories.py` (image `CATEGORIES` + work `ARTICLE_CATEGORIES`), `docs/ASSET_SCHEMA.md` |
 | Prompt manifest | `docs/city-image-prompts.json` |
 | Image doctrine | `docs/IMAGE_STYLE_GUIDE.md` |
 | Asset build/check logic | `scripts/build_asset_library.py`, `scripts/build_site_asset_inventory.py`, `scripts/build_image_pools.py`, `scripts/check_assets.py` |

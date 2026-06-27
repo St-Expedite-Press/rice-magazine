@@ -1,5 +1,14 @@
 # RICE Docs Memory
 
+## 2026-06-27 — Docs — Work taxonomy + place in ASSET_SCHEMA
+
+**Changed:** `ASSET_SCHEMA.md` now documents the two `category` axes (image-slot vs work), the `place` field (shared, renamed from image `city` / article "parish"), and a new "Works — assets/articles.json" section (work taxonomy + per-work fields + that site.js search reads it).
+**Checks:** `git diff --check` clean.
+**Follow-ups:** None.
+**Tooling notes:** ASSET_SCHEMA is now the human-facing home for both taxonomies and the article data model.
+
+---
+
 ## 2026-06-27 — Docs — New image layout + randomization in schema docs
 
 **Changed:** `ASSET_SCHEMA.md` now documents the `assets/images/<category>/` + `assets/masters/<category>/` layout and a Randomization section (archive/photo pools, `data-random`, caption-follows-image). `PHOTO_SLOTS.md` notes the new paths, marks the 4 archive grid cards as random with a no-JS fallback, and updates the add/change workflow (random slot + `build_image_pools.py`).

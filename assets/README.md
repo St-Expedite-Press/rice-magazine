@@ -32,7 +32,11 @@ assets/
     archive/   article/   _incoming/                     # original masters, not referenced by the site
   catalog.json        site-assets.json
   photo-slots.json    image-pools.json
+  articles.json
 ```
+
+Images carry `place`/`place_slug` (renamed from `city`/`city_slug`); articles carry
+`place` (was the informal "parish"). One shared geographic field.
 
 One web rendition per image (no thumb tier). Do not edit served files by hand —
 they are regenerated from `assets/masters/<category>/`. Standalone media are
@@ -63,7 +67,7 @@ Role codes:
 Every entry in [`catalog.json`](catalog.json) includes:
 
 - stable accession ID;
-- city, role, family, category, orientation, and approval status;
+- place, role, family, category, orientation, and approval status;
 - `web` and `master` paths with dimensions and file size;
 - alt text, responsive focal point, caption, and tags;
 - rights, provenance, model, generation date, and AI disclosure;
@@ -73,6 +77,8 @@ Every entry in [`catalog.json`](catalog.json) includes:
 Every entry in [`site-assets.json`](site-assets.json) includes a stable ID, category, role, known consumers, dimensions where applicable, byte size, and SHA-256 checksum (plus caption/tags for archive-pool members).
 
 [`image-pools.json`](image-pools.json) is generated from both inventories: it lists the randomizable-category images (`archive`, `photo`) with `src`, `alt`, `caption`, `tags`, and `focal_point`, and is fetched at runtime by `site.js` to fill random slots.
+
+[`articles.json`](articles.json) is the hand-authored **work data model** (`id`, `title`, `category` [article/fiction/poetry/photo/archive], `place`, `author`, `date`, `description`, `keywords`, `ref`, `href`, `hero`). `site.js` builds the search index from it; `check_assets.py` validates it. See [`../docs/ASSET_SCHEMA.md`](../docs/ASSET_SCHEMA.md).
 
 ## Workflow
 

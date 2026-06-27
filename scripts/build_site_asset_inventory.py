@@ -32,6 +32,7 @@ ASSETS = {
         "category": "archive",
         "role": "archive-document",
         "used_by": ["archive.html", "archive-template.html"],
+        "place": "Acadia Parish",
         "tags": ["ledger"],
         "caption": {"title": "Mill Ledger, 1911", "byline": "Acadia Parish", "series": "RC-ACD-1911-004"},
     },
@@ -95,6 +96,8 @@ def build() -> None:
                 record["format"] = image.format
         else:
             record["format"] = "MP4"
+        if "place" in meta:
+            record["place"] = meta["place"]
         if "tags" in meta:
             record["tags"] = meta["tags"]
         if "caption" in meta:

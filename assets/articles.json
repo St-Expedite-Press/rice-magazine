@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "generated": "2026-06-27",
+  "scope": "Editorial works — the source of truth for article metadata and the site search index.",
+  "categories_source": "scripts/asset_categories.py",
+  "field_notes": "Per work: id, title, category (work type), place, author, date, description (one sentence), keywords, ref (file id / folio / accession), href, hero (bound image path or null).",
+  "categories": [
+    { "id": "article", "description": "Essay or non-fiction prose." },
+    { "id": "fiction", "description": "Short fiction or prose narrative." },
+    { "id": "poetry", "description": "Poems and poem sequences." },
+    { "id": "photo", "description": "Photo essays or standalone photographic work." },
+    { "id": "archive", "description": "Archival records, documents, and field evidence." }
+  ],
+  "articles": [
+    {
+      "id": "RICE-ART-001",
+      "title": "Crowley Modernism",
+      "category": "article",
+      "place": "Acadia Parish",
+      "author": "C. Sandbatch",
+      "date": "2026-06-17",
+      "description": "Rice, oil, levees, and a modernism assembled from pumps, invoices, and wet heat.",
+      "keywords": ["rice", "oil", "levee", "modernism"],
+      "ref": "RCE-ESS-001",
+      "href": "essay-template.html",
+      "hero": "assets/images/archive/new-orleans-archival-evidence.jpg"
+    },
+    {
+      "id": "RICE-ART-002",
+      "title": "Against Cotton Memory",
+      "category": "article",
+      "place": "Delta interior",
+      "author": "J. T. Miller",
+      "date": null,
+      "description": "A refusal of the South as soft-focus inheritance and decorative ruin.",
+      "keywords": ["cotton", "memory", "anti-pastoral"],
+      "ref": null,
+      "href": "essays.html",
+      "hero": null
+    },
+    {
+      "id": "RICE-FIC-001",
+      "title": "The Pump House",
+      "category": "fiction",
+      "place": "Vermilion Parish",
+      "author": "L. Doucet",
+      "date": "2026-06-17",
+      "description": "A machine runs through the night while the water keeps its own account.",
+      "keywords": ["machinery", "water", "night shift"],
+      "ref": "RCE-FIC-003",
+      "href": "fiction-template.html",
+      "hero": "assets/images/article/new-orleans-nocturnal-aftermath.jpg"
+    },
+    {
+      "id": "RICE-FIC-002",
+      "title": "Twenty-Six Hours of Fluorescent Light",
+      "category": "fiction",
+      "place": "Jefferson Davis Parish",
+      "author": "M. Lapointe",
+      "date": null,
+      "description": "A convenience store, a tropical depression, and a debt nobody remembers taking on.",
+      "keywords": ["convenience store", "storm", "debt"],
+      "ref": null,
+      "href": "fiction.html",
+      "hero": null
+    },
+    {
+      "id": "RICE-POE-001",
+      "title": "Crawfish Pond with Saints",
+      "category": "poetry",
+      "place": "Gulf interior",
+      "author": "C. Sandbatch",
+      "date": null,
+      "description": "Eight lines filed between a pump house, a trap line, and a hymn.",
+      "keywords": ["wetland", "devotion", "agriculture"],
+      "ref": "Folio 04",
+      "href": "poem-template.html",
+      "hero": null
+    },
+    {
+      "id": "RICE-POE-002",
+      "title": "Three Rice Songs",
+      "category": "poetry",
+      "place": "Gulf interior",
+      "author": "M. Lapointe",
+      "date": null,
+      "description": "A sequence for water, machinery, and voices carried across a field.",
+      "keywords": ["sequence", "water", "machinery"],
+      "ref": null,
+      "href": "poetry.html",
+      "hero": null
+    },
+    {
+      "id": "RICE-ARC-001",
+      "title": "Mill Ledger, 1911",
+      "category": "archive",
+      "place": "Acadia Parish",
+      "author": "Crowley Rice Mill",
+      "date": "1911-10",
+      "description": "Names, bags, weights, grades, and remarks from the machinery of account.",
+      "keywords": ["ledger", "mill", "account"],
+      "ref": "RC-ACD-1911-004",
+      "href": "archive-template.html",
+      "hero": "assets/images/archive/archive-ledger.jpg"
+    },
+    {
+      "id": "RICE-ARC-002",
+      "title": "Field at 19:42",
+      "category": "archive",
+      "place": "Acadia Parish",
+      "author": null,
+      "date": null,
+      "description": "A weather record made from light, standing water, and the edge of a crop.",
+      "keywords": ["weather", "photograph", "field"],
+      "ref": "RC-FLD-2026-017",
+      "href": "archive.html",
+      "hero": null
+    }
+  ]
+}

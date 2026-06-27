@@ -2,7 +2,7 @@ const assetState = {
   assets: [],
   query: "",
   category: "all",
-  city: "all",
+  place: "all",
   role: "all",
   orientation: "all"
 };
@@ -14,12 +14,12 @@ const formatBytes = bytes => {
 
 const assetMatches = asset => {
   const haystack = [
-    asset.id, asset.title, asset.city, asset.category, asset.role, asset.role_label,
+    asset.id, asset.title, asset.place, asset.category, asset.role, asset.role_label,
     asset.family, asset.status
   ].join(" ").toLowerCase();
   return (!assetState.query || haystack.includes(assetState.query))
     && (assetState.category === "all" || asset.category === assetState.category)
-    && (assetState.city === "all" || asset.city_slug === assetState.city)
+    && (assetState.place === "all" || asset.place_slug === assetState.place)
     && (assetState.role === "all" || asset.role === assetState.role)
     && (assetState.orientation === "all" || asset.orientation === assetState.orientation);
 };
@@ -33,7 +33,7 @@ function assetCard(asset) {
       </button>
       <div class="asset-card-meta">
         <p>${asset.id}</p>
-        <h2>${asset.city.split(",")[0]}</h2>
+        <h2>${asset.place.split(",")[0]}</h2>
         <p>${asset.role_label} / ${asset.orientation}</p>
       </div>
     </article>
@@ -62,6 +62,7 @@ function openAsset(asset) {
       <h2>${asset.title}</h2>
       <dl>
         <div><dt>Category</dt><dd>${asset.category}</dd></div>
+        <div><dt>Place</dt><dd>${asset.place}</dd></div>
         <div><dt>Family</dt><dd>${asset.family}</dd></div>
         <div><dt>Master</dt><dd><a href="${asset.files.master.path}">${asset.files.master.width} × ${asset.files.master.height} / ${formatBytes(asset.files.master.bytes)}</a></dd></div>
         <div><dt>Web</dt><dd><a href="${asset.files.web.path}">${asset.files.web.width} × ${asset.files.web.height} / ${formatBytes(asset.files.web.bytes)}</a></dd></div>
@@ -97,9 +98,9 @@ async function initAssetLibrary() {
       .filter(category => presentCategories.has(category.id))
       .map(category => `<option value="${category.id}">${category.id}</option>`).join(""));
 
-    const cities = [...new Map(catalog.assets.map(asset => [asset.city_slug, asset.city])).entries()];
-    const citySelect = document.querySelector("[data-asset-city]");
-    citySelect.insertAdjacentHTML("beforeend", cities.map(([value, label]) => `<option value="${value}">${label}</option>`).join(""));
+    const places = [...new Map(catalog.assets.map(asset => [asset.place_slug, asset.place])).entries()];
+    const placeSelect = document.querySelector("[data-asset-place]");
+    placeSelect.insertAdjacentHTML("beforeend", places.map(([value, label]) => `<option value="${value}">${label}</option>`).join(""));
 
     const roleSelect = document.querySelector("[data-asset-role]");
     roleSelect.insertAdjacentHTML("beforeend", catalog.roles.map(role => `<option value="${role.id}">${role.label}</option>`).join(""));
@@ -107,7 +108,7 @@ async function initAssetLibrary() {
     const summary = document.querySelector("[data-asset-summary]");
     const values = summary.querySelectorAll("dd");
     values[0].textContent = catalog.assets.length;
-    values[1].textContent = cities.length;
+    values[1].textContent = places.length;
     values[2].textContent = catalog.roles.length;
 
     document.querySelector("[data-asset-search]").addEventListener("input", event => {
@@ -115,7 +116,7 @@ async function initAssetLibrary() {
       renderAssets();
     });
     categorySelect.addEventListener("change", event => { assetState.category = event.target.value; renderAssets(); });
-    citySelect.addEventListener("change", event => { assetState.city = event.target.value; renderAssets(); });
+    placeSelect.addEventListener("change", event => { assetState.place = event.target.value; renderAssets(); });
     roleSelect.addEventListener("change", event => { assetState.role = event.target.value; renderAssets(); });
     document.querySelector("[data-asset-orientation]").addEventListener("change", event => {
       assetState.orientation = event.target.value;
@@ -124,12 +125,12 @@ async function initAssetLibrary() {
     document.querySelector("[data-asset-reset]").addEventListener("click", () => {
       assetState.query = "";
       assetState.category = "all";
-      assetState.city = "all";
+      assetState.place = "all";
       assetState.role = "all";
       assetState.orientation = "all";
       document.querySelector("[data-asset-search]").value = "";
       categorySelect.value = "all";
-      citySelect.value = "all";
+      placeSelect.value = "all";
       roleSelect.value = "all";
       document.querySelector("[data-asset-orientation]").value = "all";
       renderAssets();

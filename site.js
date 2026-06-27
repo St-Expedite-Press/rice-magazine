@@ -1,12 +1,27 @@
-const RICE_INDEX = [
-  { type: "Essay", title: "Crowley Modernism", author: "C. Sandbatch", href: "essay-template.html", meta: "Acadia Parish · Vol. 1" },
-  { type: "Essay", title: "Against Cotton Memory", author: "J. T. Miller", href: "essays.html", meta: "Delta memory · Vol. 1" },
-  { type: "Fiction", title: "The Pump House", author: "L. Doucet", href: "fiction-template.html", meta: "Vermilion Parish · Vol. 1" },
-  { type: "Poetry", title: "Crawfish Pond with Saints", author: "C. Sandbatch", href: "poem-template.html", meta: "Wetland modernism · Vol. 1" },
-  { type: "Archive", title: "Mill Ledger, 1911", author: "Crowley Rice Mill", href: "archive-template.html", meta: "RC-ACD-1911-004" },
-  { type: "Field Page", title: "About RICE", author: "St. Expedite Press", href: "about.html", meta: "New Orleans, LA" },
+// Search index. Editorial works are loaded at runtime from the articles.json
+// data model; these utility pages are always present as a baseline/fallback.
+let searchIndex = [
+  { type: "Page", title: "About RICE", author: "St. Expedite Press", href: "about.html", meta: "New Orleans, LA" },
   { type: "Call", title: "Submissions", author: "RICE Editors", href: "submissions.html", meta: "Reading period open" }
 ];
+let renderSearch = null;
+
+function loadSearchIndex() {
+  fetch("assets/articles.json")
+    .then(response => (response.ok ? response.json() : Promise.reject(response.status)))
+    .then(data => {
+      const works = data.articles.map(work => ({
+        type: work.category.charAt(0).toUpperCase() + work.category.slice(1),
+        title: work.title,
+        author: work.author || "RICE",
+        href: work.href,
+        meta: [work.place, work.ref].filter(Boolean).join(" · ")
+      }));
+      searchIndex = [...works, ...searchIndex];
+      if (renderSearch) renderSearch();
+    })
+    .catch(() => { /* keep the baseline index */ });
+}
 
 function buildUtilities() {
   const masthead = document.querySelector(".masthead");
@@ -28,7 +43,7 @@ function buildUtilities() {
         <label for="site-search">SEARCH THE FIELD</label>
         <button value="cancel" aria-label="Close search">CLOSE ×</button>
       </div>
-      <input id="site-search" type="search" autocomplete="off" placeholder="TITLE / AUTHOR / PARISH">
+      <input id="site-search" type="search" autocomplete="off" placeholder="TITLE / AUTHOR / PLACE">
       <div class="search-results" aria-live="polite"></div>
     </form>
   `;
@@ -38,7 +53,7 @@ function buildUtilities() {
   const results = dialog.querySelector(".search-results");
   const render = value => {
     const query = value.trim().toLowerCase();
-    const matches = RICE_INDEX.filter(item => !query || Object.values(item).join(" ").toLowerCase().includes(query));
+    const matches = searchIndex.filter(item => !query || Object.values(item).join(" ").toLowerCase().includes(query));
     results.innerHTML = matches.length
       ? matches.map(item => `
           <a href="${item.href}" class="search-result">
@@ -49,6 +64,7 @@ function buildUtilities() {
       : `<p class="empty-state">NO RECORDS FOUND / TRY ANOTHER TERM</p>`;
   };
   render("");
+  renderSearch = () => render(input.value);
   input.addEventListener("input", event => render(event.target.value));
   tools.querySelector(".search-trigger").addEventListener("click", () => {
     dialog.showModal();
@@ -257,6 +273,7 @@ function enablePageTransition() {
 }
 
 buildUtilities();
+loadSearchIndex();
 enableReadingMode();
 randomizeImageSlots();
 enableArchiveFilters();
