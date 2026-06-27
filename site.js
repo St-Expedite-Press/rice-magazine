@@ -202,6 +202,54 @@ function installEditorialAccent() {
   }
 }
 
+function sampleDistinct(pool, count) {
+  const shuffled = pool.slice();
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  const picks = [];
+  for (let i = 0; i < count; i++) picks.push(shuffled[i % shuffled.length]);
+  return picks;
+}
+
+function applyPoolEntry(card, item) {
+  const img = card.querySelector("img");
+  if (img) {
+    img.src = item.src;
+    img.alt = item.alt || "";
+    if (item.focal_point) img.style.objectPosition = item.focal_point;
+  }
+  if (Array.isArray(item.tags)) card.dataset.tags = item.tags.join(" ");
+  const label = card.querySelector(".archive-label");
+  const caption = item.caption || {};
+  if (label) {
+    const trailing = [caption.byline, caption.series].filter(Boolean).join(" / ");
+    label.innerHTML = `<strong>${caption.title || ""}</strong>${trailing}`;
+  }
+}
+
+// Fill slots marked [data-random="<pool>"] with random images from that pool on
+// each load. The HTML ships a category-correct static image as the no-JS fallback.
+function randomizeImageSlots() {
+  const cards = [...document.querySelectorAll("[data-random]")];
+  if (!cards.length) return;
+
+  fetch("assets/image-pools.json")
+    .then(response => (response.ok ? response.json() : Promise.reject(response.status)))
+    .then(data => {
+      const pools = data.pools || {};
+      const byPool = {};
+      cards.forEach(card => (byPool[card.dataset.random] ||= []).push(card));
+      Object.entries(byPool).forEach(([name, members]) => {
+        const pool = pools[name];
+        if (!pool || !pool.length) return;
+        sampleDistinct(pool, members.length).forEach((item, i) => applyPoolEntry(members[i], item));
+      });
+    })
+    .catch(() => { /* leave the static fallback in place */ });
+}
+
 function enablePageTransition() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   document.body.classList.add("page-entering");
@@ -210,6 +258,7 @@ function enablePageTransition() {
 
 buildUtilities();
 enableReadingMode();
+randomizeImageSlots();
 enableArchiveFilters();
 enableIssueFilters();
 enableArchiveZoom();

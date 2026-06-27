@@ -14,6 +14,104 @@ The goal is not “vintage Southern photography.” The goal is a contemporary d
 
 ---
 
+## The Pre-Raphaelite Punk layer
+
+Pre-Raphaelite Punk is not a fourth subject area. It is a charge applied
+across the whole system — the romantic and devotional intensity that the C86,
+Southern, and St. Expedite registers were already reaching toward. Where the
+base grammar supplies evidence, infrastructure, and photocopy severity, this
+layer supplies aura: the felt density of things that exceed explanation.
+
+The hybrid lives on a single tension. Pre-Raphaelite luminosity — saturated,
+liturgical, erotic, feverish — meets punk refusal — hand-altered, local,
+damaged, defiant. Liturgy against heresy; ceremony against vandalism. RICE
+keeps both halves under pressure at once: beauty that keeps its aura but loses
+its innocence. The relic after the riot.
+
+This **deepens** the existing principles; it does not loosen them. Romance is
+now permitted in RICE imagery, but only romance that has survived desecration.
+Splendor is permitted, but never clean splendor. The image may be devotional,
+but the devotion must be lived and handled, never staged piety.
+
+### Misalliance and pressure
+
+Every frame should hold two things that ought not to belong together and
+refuse to cancel: a saint's medal on a leather jacket, a Burne-Jones face
+under truck-stop fluorescent light, gold thread in a flooded parlor, a poem
+folded into a work boot. The point is not collage or clever reference. The
+point is the voltage two unlike things generate when forced to touch.
+
+### Surface becomes fate
+
+Untouched luxury is useless here. Materials must look as if they passed
+through biography. Silk frayed — not because fraying photographs well, but
+because the imagination needs the wear. Gold leaf cracked. Lace smoked at the
+edge. Leather weathered across bad years and county lines. Denim bearing
+handwriting and ash. A room that looks inherited, not purchased; an object
+that looks used by history, not optimized for content. Ask of every surface:
+has this been handled, and could it haunt?
+
+### The romantic outlaw
+
+When a person appears, the recurring type is the romantic outlaw: too
+ceremonial for normcore, too lyrical for standard punk, too damaged for
+luxury, too provincial and too metaphysical for trend logic. She keeps relics
+and annotates margins. She wears inherited fabric and self-made damage in one
+silhouette. She is not trying to look efficient; she is trying to stay legible
+to older laws of beauty and fate. This refines the **author** and **maker
+portrait** roles (§5D): still direct flash, still an ordinary environment,
+still no glamour retouching — but the figure may now carry ceremonial weight,
+relics, and inherited cloth, provided the body, skin, and labor stay real.
+
+### Region
+
+This mode is native to the Gulf South, where piety, theatricality, decay, and
+vernacular splendor already share a frame: an abandoned chapel off a two-lane
+road, a parlor gone to mildew and candlewax, the humid borderland where
+baroque Catholic residue meets outlaw country and folk memory. RICE does not
+invent this; it notices it. Regionalism must be earned with specific
+present-tense material, never reached for as Southern-Gothic atmosphere.
+
+### Tonality — hold the photocopy, rupture with color
+
+The Pre-Raphaelite charge does **not** open RICE to full color or to
+gold-and-jewel luxury rendering. The monochrome photocopy base from §2 still
+governs. The splendor is carried instead by:
+
+- **form and drape** — fabric weight, folds, hair, the fall of cloth, the
+  curve of a worn relic;
+- **light** — candlewax glow, votive flame, a single low devotional source,
+  hard flash striking soft drape;
+- **material density** — brocade, cracked gilt, tarnish, wax buildup,
+  corrosion, and embroidery read as monochrome relief, not as color;
+- **symbolic overdetermination** — the object that means more than it shows.
+
+Color appears only as **rupture**, and only one rupture per image, exactly as
+in §2's single-accent rule: the acid registration yellow `#D9FF00`, or — when
+the subject is devotional — a single **oxide red `#8A281F`** standing in for
+blood, votive cloth, or a saint's ribbon. Treat oxblood as a registration
+event, not a palette. No gold-as-gold, no jewel tones, no candlelit warmth
+bath, no sepia. The gold must crack into grey; the blood must survive as one
+mark.
+
+### The dangers
+
+This much symbolic charge invites caricature. Reject:
+
+- fake damage and prop distress with no real wear behind it;
+- borrowed piety — saints, thorns, and crosses used as decoration rather than
+  lived evidence;
+- internet-Gothic styling, costume Victoriana, the "lace and combat boots"
+  cliché;
+- generalized "poetry" or theatricality that gestures at depth while staying
+  frictionless.
+
+The only cure is seriousness: the references must mean something, the romance
+must admit ugliness, the rebellion must be particular, and the ruin must be
+present-tense and inhabited — never abandoned-house tourism (§11).
+
+---
+
 ## 1. Governing principles
 
 ### Evidence over atmosphere
@@ -38,17 +136,42 @@ Avoid presenting the South as vanished, sepia, quaint, or safely historical. Con
 
 Images may be beautiful, but their beauty should be interrupted by labor, accounting, weather, infrastructure, debt, or use.
 
+The *Pre-Raphaelite Punk layer* (above) deepens this principle: romance and devotional splendor are now permitted, but only after they have survived desecration — never as clean luxury or staged piety.
+
 ### One unresolved element
 
 Every principal image should contain one detail that is not immediately explained: a distant light, cropped notation, open cabinet, registration symbol, torn edge, or object outside the expected context.
+
+### Clear narrative
+
+Every image must read as a scene, not a texture. A viewer should be able to
+say what is happening, what was just done, or what is about to happen: who
+used this room, what the weather did, what the document records. Mood without
+event is not enough. If an image cannot be narrated in one sentence, it is
+decoration and is rejected. This pairs with *Evidence over atmosphere* —
+evidence supplies the nouns, narrative supplies the verb.
 
 ---
 
 ## 2. Core visual grammar
 
+### Photographic register
+
+Every image published on the RICE site is black-and-white hand-camera
+documentary — a 35mm "hipster" film register: visible grain, available light
+or hard direct flash, candid and slightly imperfect framing, unposed. This is
+the amateur immediacy of the C86 strand, not commercial lifestyle, influencer,
+or fashion photography (§11). Cool, deadpan, and unglamorous — never
+aspirational, never clean.
+
+There is no exception for non-editorial pages: splash, shop, about, and
+section art obey the same monochrome rule as the city field notes.
+
 ### Tonality
 
-- Primarily black and white.
+- Black and white, with no color photography anywhere on the site. Color
+  survives only as a single registration or print mark (see *Accent color*),
+  never as a photographed hue.
 - Dense blacks; paper-colored highlights rather than pure white.
 - Midtones may be compressed like a photocopy.
 - Retain important shadow detail around the subject.
@@ -220,6 +343,21 @@ Use devotional material as lived evidence, never as gothic decoration.
 - hand-painted signs;
 - damp drywall.
 
+### Reliquary and romance (Pre-Raphaelite Punk)
+
+Under the *Pre-Raphaelite Punk layer*, the following may enter — but only as
+handled, present-tense evidence, never as costume:
+
+- saint medals pinned to leather or denim;
+- cracked gold leaf, tarnished gilt, brocade, and embroidery;
+- lace and silk that is frayed, smoked, or water-damaged;
+- candlewax buildup, votive flame, hand-annotated prayer cards;
+- hair, thorns, dried flowers, and devotional ribbon as material fact;
+- a church or chapel space repurposed as a venue, workroom, or shelter;
+- inherited cloth worn with self-made damage in one silhouette.
+
+If the object has not been handled by a life, it does not belong in frame.
+
 ---
 
 ## 5. Image families
@@ -373,6 +511,14 @@ fake film border, handwritten inspirational quote, random typography,
 watermark, logo, illegible headline
 ```
 
+### Pre-Raphaelite Punk negative additions
+
+When working in this layer, also avoid: costume Victoriana, the "lace and
+combat boots" cliché, internet-Gothic props, borrowed piety, prop distress
+with no real wear, jewel tones, gold-as-gold luxury rendering, candlelit
+warmth baths, and theatricality that gestures at depth while staying
+frictionless.
+
 ---
 
 ## 8. Prompt presets
@@ -428,6 +574,21 @@ slightly off-register photocopy reproduction, plain wall or workplace
 evidence, contemporary and unsentimental.
 ```
 
+### Pre-Raphaelite Punk feature
+
+```text
+[Documentary format] of [specific Gulf South interior or structure carrying
+devotional residue — chapel-turned-venue, mildewed parlor, work room with a
+taped shrine], where one luminous symbolic object (cracked gilt, frayed
+brocade, votive flame, a saint medal on leather) sits inside present-tense
+labor and decay. Carry the splendor through form, drape, and light, not
+color: dense black-and-white photocopy base, candle or votive light rendered
+monochrome, one unresolved devotional detail. Permit a single color rupture
+only — the acid-yellow registration mark, or one oxide-red votive trace
+standing in for blood or ribbon. Reserve the lower-left as quiet shadow for an
+editorial panel. No costume, no clean luxury, no Southern-Gothic tourism.
+```
+
 ---
 
 ## 9. Cropping and responsive behavior
@@ -478,6 +639,42 @@ not an authenticated historical record
 
 ---
 
+## Generation hygiene — AI symptoms and artifact bloat
+
+These images are model-generated, so every candidate is inspected at full size
+for synthetic failure before it enters the catalog. The photocopy texture is
+not a license to hide flaws and must never be used to disguise generation
+artifacts.
+
+Reject or regenerate on any of these:
+
+- **Anatomy:** malformed or extra fingers, fused hands, wrong joint counts,
+  asymmetric or melted eyes and ears, impossible posture.
+- **Text:** garbled, invented, or gibberish lettering on signs, labels,
+  documents, or screens. Prominent text must stay incidental and unreadable
+  (§6), but *plausibly* unreadable — real letterforms out of focus, not
+  nonsense glyphs.
+- **Geometry:** warped straight lines, bent architecture, openings that do not
+  resolve, melted hardware, tools that are not real objects, impossible
+  mechanical assemblies.
+- **Repetition and bloat:** duplicated or cloned objects, tiling textures, and
+  "more stuff" filling the frame with meaningless detail. Fewer, real,
+  legible objects beat a crowded synthetic field.
+- **Surface symptoms:** plastic or waxy skin, over-smooth HDR sheen,
+  oversharpened halos, painterly smearing — the uncanny "AI gloss" that
+  contradicts the photocopy base and the film register (§2).
+- **Continuity:** contradictory shadows, mismatched reflections, and scale
+  errors (objects the wrong size for the room).
+
+Test every candidate by zooming to 100% on each region a reader could examine
+— hands, text, fasteners, edges, machinery. If a detail falls apart under
+inspection, the image fails *Evidence over atmosphere* and is rejected,
+regardless of overall mood. Prefer regenerating, compositing, or using a real
+scan over shipping a flawed candidate, and note the failure in the prompt
+record so the prompt can be tightened.
+
+---
+
 ## 11. Rejection checklist
 
 Reject an image if:
@@ -491,7 +688,14 @@ Reject an image if:
 - the composition leaves no usable type or metadata space;
 - generated text makes unsupported claims;
 - it resembles commercial lifestyle, tourism, or luxury publishing;
-- it looks “old” but says nothing about the present.
+- it looks “old” but says nothing about the present;
+- it deploys saints, thorns, gilt, or lace as decoration rather than lived evidence;
+- its damage is faked or propped rather than earned;
+- it reads as costume, Victoriana, or internet-Gothic styling;
+- splendor arrives clean, in full color, or as luxury rendering;
+- it carries visible AI artifacts — malformed hands, gibberish text, warped geometry, or cloned/duplicated detail;
+- it shows synthetic surface symptoms (plastic skin, HDR gloss, oversharpened halos) that contradict the photocopy base;
+- it cannot be narrated in one sentence.
 
 ---
 
@@ -507,4 +711,5 @@ An approved RICE image should answer yes to at least four:
 - Does it leave room for editorial intervention?
 - Is its beauty complicated?
 - Does it belong to RICE and not merely “the South”?
+- If it carries romance or splendor, has that romance survived desecration?
 

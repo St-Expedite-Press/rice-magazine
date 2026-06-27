@@ -1,6 +1,9 @@
 """Build the RICE editorial image catalog and web derivatives.
 
-Run from the repository root:
+Reads original masters from ``assets/masters/<category>/`` and writes a single
+web rendition per image to ``assets/images/<category>/``. Run from the
+repository root:
+
     python scripts/build_asset_library.py
 """
 
@@ -8,17 +11,18 @@ from __future__ import annotations
 
 import json
 import hashlib
-import shutil
 from datetime import date
 from pathlib import Path
 
 from PIL import Image, ImageOps
 
+from asset_categories import category_block, validate_category
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PROMPTS = ROOT / "docs" / "city-image-prompts.json"
-LEGACY_ROOT = ROOT / "images" / "city-field-notes"
-LIBRARY_ROOT = ROOT / "images" / "editorial" / "city-field-notes"
+MASTERS_ROOT = ROOT / "assets" / "masters"
+IMAGES_ROOT = ROOT / "assets" / "images"
 CATALOG_PATH = ROOT / "assets" / "catalog.json"
 
 CITY_CODES = {
@@ -34,40 +38,50 @@ ROLE_META = {
         "code": "SFN",
         "label": "Street field note",
         "family": "section-feature",
+        "category": "archive",
         "orientation": "landscape",
         "focal_point": "68% center",
+        "tags": ["field", "weather"],
         "alt": "Deadpan documentary view of present-day service infrastructure in {city}.",
     },
     "working-interior": {
         "code": "WIN",
         "label": "Working interior",
         "family": "article-figure",
+        "category": "article",
         "orientation": "landscape",
         "focal_point": "center center",
+        "tags": ["interior"],
         "alt": "Working interior in {city} showing practical equipment and evidence of recent use.",
     },
     "archival-evidence": {
         "code": "ARC",
         "label": "Archival evidence",
         "family": "archive-object",
+        "category": "archive",
         "orientation": "portrait",
         "focal_point": "center center",
+        "tags": ["ledger", "document"],
         "alt": "Generated archival reconstruction composed from documents and material evidence associated with {city}.",
     },
     "maker-portrait": {
         "code": "POR",
         "label": "Maker portrait",
         "family": "author-portrait",
+        "category": "article",
         "orientation": "portrait",
         "focal_point": "center 35%",
+        "tags": ["portrait"],
         "alt": "Direct-flash documentary portrait of a contemporary writer or maker in {city}.",
     },
     "nocturnal-aftermath": {
         "code": "NOC",
         "label": "Nocturnal aftermath",
         "family": "fiction-feature",
+        "category": "article",
         "orientation": "landscape",
         "focal_point": "68% center",
+        "tags": ["night"],
         "alt": "Empty nighttime work site in {city} showing evidence of recent labor.",
     },
 }
@@ -94,17 +108,6 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def source_for(city_slug: str, filename: str, master_path: Path) -> Path:
-    legacy_path = LEGACY_ROOT / city_slug / filename
-    if master_path.exists():
-        return master_path
-    if not legacy_path.exists():
-        raise FileNotFoundError(f"Missing master for {city_slug}/{filename}")
-    master_path.parent.mkdir(parents=True, exist_ok=True)
-    shutil.move(str(legacy_path), str(master_path))
-    return master_path
-
-
 def build() -> None:
     manifest = json.loads(PROMPTS.read_text(encoding="utf-8"))
     records = []
@@ -113,39 +116,41 @@ def build() -> None:
         city_slug = city["slug"]
         city_code = CITY_CODES[city_slug]
         city_name = city["city"]
+        city_short = city_name.split(",")[0]
 
         for image in city["images"]:
             role = image["role"]
             role_meta = ROLE_META[role]
+            category = role_meta["category"]
+            validate_category(category, role)
             stem = Path(image["filename"]).stem
             asset_id = f"RICE-CFN-{city_code}-{role_meta['code']}-001"
 
-            master = LIBRARY_ROOT / city_slug / "master" / f"{stem}.jpg"
-            web = LIBRARY_ROOT / city_slug / "web" / f"{stem}.jpg"
-            thumb = LIBRARY_ROOT / city_slug / "thumb" / f"{stem}.jpg"
-            source = source_for(city_slug, image["filename"], master)
+            master = MASTERS_ROOT / category / f"{stem}.jpg"
+            web = IMAGES_ROOT / category / f"{stem}.jpg"
+            if not master.exists():
+                raise FileNotFoundError(f"Missing master for {asset_id}: {relative(master)}")
 
-            with Image.open(source) as original:
+            with Image.open(master) as original:
                 original = ImageOps.exif_transpose(original)
                 master_meta = {
                     "width": original.width,
                     "height": original.height,
-                    "bytes": source.stat().st_size,
-                    "sha256": sha256(source),
+                    "bytes": master.stat().st_size,
+                    "sha256": sha256(master),
                 }
 
-            web_meta = save_jpeg(source, web, (1800, 1800), 86)
+            web_meta = save_jpeg(master, web, (1800, 1800), 86)
             web_meta["sha256"] = sha256(web)
-            thumb_meta = save_jpeg(source, thumb, (640, 640), 78)
-            thumb_meta["sha256"] = sha256(thumb)
 
             records.append(
                 {
                     "id": asset_id,
-                    "title": f"{city_name.split(',')[0]} / {role_meta['label']}",
+                    "title": f"{city_short} / {role_meta['label']}",
                     "collection": "city-field-notes",
                     "city": city_name,
                     "city_slug": city_slug,
+                    "category": category,
                     "role": role,
                     "role_label": role_meta["label"],
                     "family": role_meta["family"],
@@ -159,19 +164,24 @@ def build() -> None:
                     "alt": role_meta["alt"].format(city=city_name),
                     "focal_point": role_meta["focal_point"],
                     "accent": "#D9FF00",
+                    "tags": role_meta["tags"],
+                    "caption": {
+                        "title": f"{city_short} / {role_meta['label']}",
+                        "byline": None,
+                        "series": asset_id,
+                    },
                     "prompt": image["prompt"],
                     "prompt_source": relative(PROMPTS),
                     "files": {
-                        "master": {"path": relative(master), **master_meta},
                         "web": {"path": relative(web), **web_meta},
-                        "thumb": {"path": relative(thumb), **thumb_meta},
+                        "master": {"path": relative(master), **master_meta},
                     },
                 }
             )
 
     CATALOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     catalog = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated": date.today().isoformat(),
         "collection": {
             "id": "city-field-notes",
@@ -180,11 +190,13 @@ def build() -> None:
             "style_guide": "docs/IMAGE_STYLE_GUIDE.md",
             "prompt_manifest": relative(PROMPTS),
         },
+        "categories": category_block(),
         "roles": [
             {
                 "id": role,
                 "label": meta["label"],
                 "family": meta["family"],
+                "category": meta["category"],
                 "code": meta["code"],
             }
             for role, meta in ROLE_META.items()
@@ -192,9 +204,6 @@ def build() -> None:
         "assets": records,
     }
     CATALOG_PATH.write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-
-    if LEGACY_ROOT.exists() and not any(LEGACY_ROOT.rglob("*.*")):
-        shutil.rmtree(LEGACY_ROOT)
 
     print(f"Built {len(records)} assets at {relative(CATALOG_PATH)}")
 

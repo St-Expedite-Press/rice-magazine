@@ -1,6 +1,7 @@
 const assetState = {
   assets: [],
   query: "",
+  category: "all",
   city: "all",
   role: "all",
   orientation: "all"
@@ -13,10 +14,11 @@ const formatBytes = bytes => {
 
 const assetMatches = asset => {
   const haystack = [
-    asset.id, asset.title, asset.city, asset.role, asset.role_label,
+    asset.id, asset.title, asset.city, asset.category, asset.role, asset.role_label,
     asset.family, asset.status
   ].join(" ").toLowerCase();
   return (!assetState.query || haystack.includes(assetState.query))
+    && (assetState.category === "all" || asset.category === assetState.category)
     && (assetState.city === "all" || asset.city_slug === assetState.city)
     && (assetState.role === "all" || asset.role === assetState.role)
     && (assetState.orientation === "all" || asset.orientation === assetState.orientation);
@@ -26,7 +28,7 @@ function assetCard(asset) {
   return `
     <article class="asset-card">
       <button type="button" class="asset-preview" data-asset-id="${asset.id}" aria-label="Inspect ${asset.title}">
-        <img src="${asset.files.thumb.path}" alt="${asset.alt}" width="${asset.files.thumb.width}" height="${asset.files.thumb.height}" style="object-position:${asset.focal_point}" loading="lazy">
+        <img src="${asset.files.web.path}" alt="${asset.alt}" width="${asset.files.web.width}" height="${asset.files.web.height}" style="object-position:${asset.focal_point}" loading="lazy" decoding="async">
         <span>${asset.status}</span>
       </button>
       <div class="asset-card-meta">
@@ -59,6 +61,7 @@ function openAsset(asset) {
       <p class="eyebrow">${asset.id} / ${asset.status}</p>
       <h2>${asset.title}</h2>
       <dl>
+        <div><dt>Category</dt><dd>${asset.category}</dd></div>
         <div><dt>Family</dt><dd>${asset.family}</dd></div>
         <div><dt>Master</dt><dd><a href="${asset.files.master.path}">${asset.files.master.width} × ${asset.files.master.height} / ${formatBytes(asset.files.master.bytes)}</a></dd></div>
         <div><dt>Web</dt><dd><a href="${asset.files.web.path}">${asset.files.web.width} × ${asset.files.web.height} / ${formatBytes(asset.files.web.bytes)}</a></dd></div>
@@ -87,6 +90,13 @@ async function initAssetLibrary() {
     const catalog = await response.json();
     assetState.assets = catalog.assets;
 
+    const categorySelect = document.querySelector("[data-asset-category]");
+    const categories = catalog.categories || [];
+    const presentCategories = new Set(catalog.assets.map(asset => asset.category));
+    categorySelect.insertAdjacentHTML("beforeend", categories
+      .filter(category => presentCategories.has(category.id))
+      .map(category => `<option value="${category.id}">${category.id}</option>`).join(""));
+
     const cities = [...new Map(catalog.assets.map(asset => [asset.city_slug, asset.city])).entries()];
     const citySelect = document.querySelector("[data-asset-city]");
     citySelect.insertAdjacentHTML("beforeend", cities.map(([value, label]) => `<option value="${value}">${label}</option>`).join(""));
@@ -104,6 +114,7 @@ async function initAssetLibrary() {
       assetState.query = event.target.value.trim().toLowerCase();
       renderAssets();
     });
+    categorySelect.addEventListener("change", event => { assetState.category = event.target.value; renderAssets(); });
     citySelect.addEventListener("change", event => { assetState.city = event.target.value; renderAssets(); });
     roleSelect.addEventListener("change", event => { assetState.role = event.target.value; renderAssets(); });
     document.querySelector("[data-asset-orientation]").addEventListener("change", event => {
@@ -112,10 +123,12 @@ async function initAssetLibrary() {
     });
     document.querySelector("[data-asset-reset]").addEventListener("click", () => {
       assetState.query = "";
+      assetState.category = "all";
       assetState.city = "all";
       assetState.role = "all";
       assetState.orientation = "all";
       document.querySelector("[data-asset-search]").value = "";
+      categorySelect.value = "all";
       citySelect.value = "all";
       roleSelect.value = "all";
       document.querySelector("[data-asset-orientation]").value = "all";

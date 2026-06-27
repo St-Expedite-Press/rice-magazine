@@ -47,7 +47,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: 0;
-  background: url("images/noise.png") repeat;
+  background: url("assets/images/system/noise.png") repeat;
   opacity: 0.055;
   mix-blend-mode: multiply;
   pointer-events: none;
@@ -505,7 +505,7 @@ button:focus-visible {
 body.splash {
   min-height: 100svh;
   overflow: hidden;
-  background: url("images/rice_field.png") center / cover no-repeat;
+  background: url("assets/images/system/rice_field.png") center / cover no-repeat;
   display: grid;
   place-items: center;
 }
@@ -567,7 +567,7 @@ body.splash::before {
   z-index: -1;
   background:
     linear-gradient(91deg, transparent 0 97%, rgba(17, 17, 17, 0.07) 100%),
-    url("images/noise.png") repeat;
+    url("assets/images/system/noise.png") repeat;
   opacity: 0.14;
   mix-blend-mode: multiply;
   pointer-events: none;

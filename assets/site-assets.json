@@ -1,27 +1,58 @@
 {
-  "schema_version": 1,
-  "generated": "2026-06-21",
-  "scope": "Standalone site media in images/; editorial collection assets are cataloged separately.",
-  "source_of_truth": "images/",
+  "schema_version": 2,
+  "generated": "2026-06-27",
+  "scope": "Standalone site media in assets/images/<category>/; editorial collection assets are cataloged separately.",
+  "source_of_truth": "assets/images/",
+  "categories": [
+    {
+      "id": "archive",
+      "description": "Reusable archival imagery for archive image slots anywhere on the site."
+    },
+    {
+      "id": "article",
+      "description": "Imagery bound directly to a single article, essay, poem, or fiction piece."
+    },
+    {
+      "id": "feature",
+      "description": "Imagery bound to a site element such as a section landing, shop, or submissions."
+    },
+    {
+      "id": "photo",
+      "description": "Standalone photography or photo-submission carousels."
+    },
+    {
+      "id": "system",
+      "description": "Site chrome and identity media: logo, textures, splash, and fallbacks."
+    }
+  ],
   "assets": [
     {
       "id": "RICE-SITE-ARCHIVE_LEDGER",
-      "path": "images/archive-ledger.jpg",
+      "path": "assets/images/archive/archive-ledger.jpg",
+      "category": "archive",
       "role": "archive-document",
       "used_by": [
         "archive.html",
-        "archive-template.html",
-        "poetry.html"
+        "archive-template.html"
       ],
       "bytes": 933889,
       "sha256": "cbb68d392d7a961bbb60a1d0e8a1e24ec23182a4489133be9c895da50f308043",
       "width": 1200,
       "height": 896,
-      "format": null
+      "format": null,
+      "tags": [
+        "ledger"
+      ],
+      "caption": {
+        "title": "Mill Ledger, 1911",
+        "byline": "Acadia Parish",
+        "series": "RC-ACD-1911-004"
+      }
     },
     {
       "id": "RICE-SITE-ARCHIVE_PLACEHOLDER",
-      "path": "images/archive-placeholder.png",
+      "path": "assets/images/system/archive-placeholder.png",
+      "category": "system",
       "role": "fallback-texture",
       "used_by": [],
       "bytes": 263053,
@@ -32,7 +63,8 @@
     },
     {
       "id": "RICE-SITE-FEATURE_ARCHIVE",
-      "path": "images/feature-archive.png",
+      "path": "assets/images/feature/feature-archive.png",
+      "category": "feature",
       "role": "section-feature",
       "used_by": [
         "index.html",
@@ -46,7 +78,8 @@
     },
     {
       "id": "RICE-SITE-FEATURE_ESSAYS",
-      "path": "images/feature-essays.jpg",
+      "path": "assets/images/feature/feature-essays.jpg",
+      "category": "feature",
       "role": "section-feature",
       "used_by": [
         "index.html",
@@ -60,7 +93,8 @@
     },
     {
       "id": "RICE-SITE-FEATURE_FICTION",
-      "path": "images/feature-fiction.jpg",
+      "path": "assets/images/feature/feature-fiction.jpg",
+      "category": "feature",
       "role": "section-feature",
       "used_by": [
         "index.html",
@@ -74,7 +108,8 @@
     },
     {
       "id": "RICE-SITE-FEATURE_POETRY",
-      "path": "images/feature-poetry.jpg",
+      "path": "assets/images/feature/feature-poetry.jpg",
+      "category": "feature",
       "role": "section-feature",
       "used_by": [
         "index.html",
@@ -88,11 +123,13 @@
     },
     {
       "id": "RICE-SITE-FEATURE",
-      "path": "images/feature.png",
+      "path": "assets/images/feature/feature.png",
+      "category": "feature",
       "role": "general-feature",
       "used_by": [
         "essays.html",
         "poetry.html",
+        "fiction.html",
         "archive.html"
       ],
       "bytes": 584284,
@@ -103,7 +140,8 @@
     },
     {
       "id": "RICE-SITE-ISSUE_SPECIMEN",
-      "path": "images/issue-specimen.jpg",
+      "path": "assets/images/feature/issue-specimen.jpg",
+      "category": "feature",
       "role": "publication-specimen",
       "used_by": [
         "archive.html",
@@ -117,7 +155,8 @@
     },
     {
       "id": "RICE-SITE-LOGO",
-      "path": "images/logo.png",
+      "path": "assets/images/system/logo.png",
+      "category": "system",
       "role": "site-identity",
       "used_by": [
         "all HTML pages"
@@ -130,7 +169,8 @@
     },
     {
       "id": "RICE-SITE-NOISE",
-      "path": "images/noise.png",
+      "path": "assets/images/system/noise.png",
+      "category": "system",
       "role": "surface-texture",
       "used_by": [
         "styles.css"
@@ -143,7 +183,8 @@
     },
     {
       "id": "RICE-SITE-RICE_FIELD_LOOP",
-      "path": "images/rice-field-loop.mp4",
+      "path": "assets/images/system/rice-field-loop.mp4",
+      "category": "system",
       "role": "splash-background-video",
       "used_by": [
         "splash.html"
@@ -154,12 +195,12 @@
     },
     {
       "id": "RICE-SITE-RICE_FIELD",
-      "path": "images/rice_field.png",
+      "path": "assets/images/system/rice_field.png",
+      "category": "system",
       "role": "splash-poster-and-feature",
       "used_by": [
         "splash.html",
-        "styles.css",
-        "section pages"
+        "styles.css"
       ],
       "bytes": 2218126,
       "sha256": "6e427b0a1edeff46d7764704d6d09dd4594cd997da5aba37ef3895395f8b8f8b",

@@ -8,8 +8,11 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
+from asset_categories import is_media, validate_category
+
 
 ROOT = Path(__file__).resolve().parents[1]
+IMAGES_ROOT = ROOT / "assets" / "images"
 
 
 def sha256(path: Path) -> str:
@@ -35,6 +38,82 @@ def check_file(record: dict, label: str) -> None:
                 raise RuntimeError(f"{label}: dimensions drift for {record['path']}")
 
 
+def image_category_index(editorial: dict, site: dict) -> dict:
+    """Map every catalogued served image path to its asset category."""
+    index: dict[str, str] = {}
+    for asset in editorial["assets"]:
+        index[asset["files"]["web"]["path"]] = asset["category"]
+    for asset in site["assets"]:
+        index[asset["path"]] = asset["category"]
+    return index
+
+
+def check_image_pools(category_of: dict) -> str:
+    """Validate image-pools.json: every entry resolves to a real, in-category file."""
+    pools_path = ROOT / "assets" / "image-pools.json"
+    if not pools_path.is_file():
+        return "no pools"
+    pools = json.loads(pools_path.read_text(encoding="utf-8"))["pools"]
+    summary = []
+    for category, entries in pools.items():
+        validate_category(category, "image-pools")
+        for item in entries:
+            src = item["src"]
+            if not (ROOT / src).is_file():
+                raise RuntimeError(f"image-pools {category}: missing {src}")
+            if category_of.get(src) != category:
+                raise RuntimeError(
+                    f"image-pools {category}: {src} is category "
+                    f"'{category_of.get(src)}', not '{category}'"
+                )
+        summary.append(f"{category}={len(entries)}")
+    return ", ".join(summary)
+
+
+def check_photo_slots(editorial: dict, site: dict) -> int:
+    """Validate the rendered photo-slot inventory against the asset categories."""
+    slots_path = ROOT / "assets" / "photo-slots.json"
+    if not slots_path.is_file():
+        return 0
+    manifest = json.loads(slots_path.read_text(encoding="utf-8"))
+    category_of = image_category_index(editorial, site)
+    pools = {}
+    pools_path = ROOT / "assets" / "image-pools.json"
+    if pools_path.is_file():
+        pools = json.loads(pools_path.read_text(encoding="utf-8"))["pools"]
+
+    seen: set[str] = set()
+    for slot in manifest["slots"]:
+        sid = slot["id"]
+        if sid in seen:
+            raise RuntimeError(f"Duplicate slot ID: {sid}")
+        seen.add(sid)
+        validate_category(slot["category"], f"slot {sid}")
+        # Each image/poster (including the no-JS fallback) must be category-correct.
+        for key in ("image", "poster"):
+            ref = slot.get(key)
+            if ref is None:
+                continue
+            if not (ROOT / ref).is_file():
+                raise RuntimeError(f"slot {sid}: missing {key} {ref}")
+            actual = category_of.get(ref)
+            if actual is None:
+                raise RuntimeError(f"slot {sid}: {key} {ref} is not in any asset inventory")
+            if actual != slot["category"]:
+                raise RuntimeError(
+                    f"slot {sid}: {key} {ref} is category '{actual}' "
+                    f"but the slot is assigned '{slot['category']}'"
+                )
+        # Random slots must draw from a non-empty pool of their category.
+        if slot.get("random"):
+            pool = slot.get("pool")
+            if pool != slot["category"]:
+                raise RuntimeError(f"slot {sid}: random pool '{pool}' must equal slot category '{slot['category']}'")
+            if not pools.get(pool):
+                raise RuntimeError(f"slot {sid}: random pool '{pool}' is empty or missing in image-pools.json")
+    return len(manifest["slots"])
+
+
 def main() -> None:
     editorial = json.loads((ROOT / "assets" / "catalog.json").read_text(encoding="utf-8"))
     site = json.loads((ROOT / "assets" / "site-assets.json").read_text(encoding="utf-8"))
@@ -50,42 +129,44 @@ def main() -> None:
         if asset["id"] in ids:
             raise RuntimeError(f"Duplicate asset ID: {asset['id']}")
         ids.add(asset["id"])
+        validate_category(asset.get("category", ""), asset["id"])
         prompt_key = (asset["city_slug"], asset["role"])
         if prompt_records.get(prompt_key) != asset["prompt"]:
             raise RuntimeError(f"{asset['id']}: prompt metadata is out of date")
         if asset["model"] != prompts["model"] or asset["disclosure"] != prompts["disclosure"]:
             raise RuntimeError(f"{asset['id']}: generation metadata is out of date")
-        for tier in ("master", "web", "thumb"):
+        for tier in ("web", "master"):
             check_file(asset["files"][tier], f"{asset['id']} {tier}")
         if max(asset["files"]["web"]["width"], asset["files"]["web"]["height"]) > 1800:
             raise RuntimeError(f"{asset['id']}: web derivative exceeds 1800 px")
-        if max(asset["files"]["thumb"]["width"], asset["files"]["thumb"]["height"]) > 640:
-            raise RuntimeError(f"{asset['id']}: thumbnail exceeds 640 px")
 
     if len(prompt_records) != len(editorial["assets"]):
         raise RuntimeError("Prompt manifest and editorial catalog counts differ")
 
-    site_paths = {record["path"] for record in site["assets"]}
-    actual_site_paths = {
-        path.relative_to(ROOT).as_posix()
-        for path in (ROOT / "images").iterdir()
-        if path.is_file()
-    }
-    if site_paths != actual_site_paths:
-        raise RuntimeError(
-            "Standalone site inventory mismatch; "
-            f"missing={sorted(site_paths - actual_site_paths)}, "
-            f"unmanaged={sorted(actual_site_paths - site_paths)}"
-        )
     for asset in site["assets"]:
         if asset["id"] in ids:
             raise RuntimeError(f"Duplicate asset ID: {asset['id']}")
         ids.add(asset["id"])
+        validate_category(asset.get("category", ""), asset["id"])
         check_file(asset, asset["id"])
+
+    # Every served image file must be covered by exactly one inventory.
+    served = {p.relative_to(ROOT).as_posix() for p in IMAGES_ROOT.rglob("*") if is_media(p)}
+    covered = {a["files"]["web"]["path"] for a in editorial["assets"]} | {a["path"] for a in site["assets"]}
+    if served != covered:
+        raise RuntimeError(
+            "Served image set mismatch; "
+            f"orphans={sorted(served - covered)}, missing={sorted(covered - served)}"
+        )
+
+    category_of = image_category_index(editorial, site)
+    pool_summary = check_image_pools(category_of)
+    slot_count = check_photo_slots(editorial, site)
 
     print(
         f"[check-assets] PASS: {len(editorial['assets'])} editorial assets, "
-        f"{len(site['assets'])} standalone site assets"
+        f"{len(site['assets'])} standalone site assets, "
+        f"{slot_count} photo slots, pools [{pool_summary}]"
     )
 
 

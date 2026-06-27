@@ -1,5 +1,9 @@
 """Build the inventory for standalone RICE site media.
 
+Standalone media now live in ``assets/images/<category>/`` alongside the
+editorial collection. This script records the explicitly-managed standalone
+files; editorial assets are cataloged by ``build_asset_library.py``.
+
 Run from the repository root:
     python scripts/build_site_asset_inventory.py
 """
@@ -13,23 +17,35 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
+from asset_categories import category_block, is_media, validate_category
+
 
 ROOT = Path(__file__).resolve().parents[1]
+IMAGES_ROOT = ROOT / "assets" / "images"
+CATALOG_PATH = ROOT / "assets" / "catalog.json"
 OUTPUT = ROOT / "assets" / "site-assets.json"
 
+# filename -> managed standalone media metadata. `caption`/`tags` are only
+# meaningful for randomizable categories (archive); others leave them empty.
 ASSETS = {
-    "archive-ledger.jpg": ("archive-document", ["archive.html", "archive-template.html", "poetry.html"]),
-    "archive-placeholder.png": ("fallback-texture", []),
-    "feature-archive.png": ("section-feature", ["index.html", "archive.html"]),
-    "feature-essays.jpg": ("section-feature", ["index.html", "essays.html"]),
-    "feature-fiction.jpg": ("section-feature", ["index.html", "fiction.html"]),
-    "feature-poetry.jpg": ("section-feature", ["index.html", "poetry.html"]),
-    "feature.png": ("general-feature", ["essays.html", "poetry.html", "archive.html"]),
-    "issue-specimen.jpg": ("publication-specimen", ["archive.html", "shop.html"]),
-    "logo.png": ("site-identity", ["all HTML pages"]),
-    "noise.png": ("surface-texture", ["styles.css"]),
-    "rice-field-loop.mp4": ("splash-background-video", ["splash.html"]),
-    "rice_field.png": ("splash-poster-and-feature", ["splash.html", "styles.css", "section pages"]),
+    "archive-ledger.jpg": {
+        "category": "archive",
+        "role": "archive-document",
+        "used_by": ["archive.html", "archive-template.html"],
+        "tags": ["ledger"],
+        "caption": {"title": "Mill Ledger, 1911", "byline": "Acadia Parish", "series": "RC-ACD-1911-004"},
+    },
+    "archive-placeholder.png": {"category": "system", "role": "fallback-texture", "used_by": []},
+    "feature-archive.png": {"category": "feature", "role": "section-feature", "used_by": ["index.html", "archive.html"]},
+    "feature-essays.jpg": {"category": "feature", "role": "section-feature", "used_by": ["index.html", "essays.html"]},
+    "feature-fiction.jpg": {"category": "feature", "role": "section-feature", "used_by": ["index.html", "fiction.html"]},
+    "feature-poetry.jpg": {"category": "feature", "role": "section-feature", "used_by": ["index.html", "poetry.html"]},
+    "feature.png": {"category": "feature", "role": "general-feature", "used_by": ["essays.html", "poetry.html", "fiction.html", "archive.html"]},
+    "issue-specimen.jpg": {"category": "feature", "role": "publication-specimen", "used_by": ["archive.html", "shop.html"]},
+    "logo.png": {"category": "system", "role": "site-identity", "used_by": ["all HTML pages"]},
+    "noise.png": {"category": "system", "role": "surface-texture", "used_by": ["styles.css"]},
+    "rice-field-loop.mp4": {"category": "system", "role": "splash-background-video", "used_by": ["splash.html"]},
+    "rice_field.png": {"category": "system", "role": "splash-poster-and-feature", "used_by": ["splash.html", "styles.css"]},
 }
 
 
@@ -41,23 +57,33 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def rel(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
+
+
 def build() -> None:
-    image_root = ROOT / "images"
-    actual = {path.name for path in image_root.iterdir() if path.is_file()}
-    expected = set(ASSETS)
-    if actual != expected:
-        missing = sorted(expected - actual)
-        unmanaged = sorted(actual - expected)
+    catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+    editorial_paths = {asset["files"]["web"]["path"] for asset in catalog["assets"]}
+
+    expected = {f"assets/images/{meta['category']}/{name}" for name, meta in ASSETS.items()}
+    present = {rel(p) for p in IMAGES_ROOT.rglob("*") if is_media(p)}
+    standalone_present = present - editorial_paths
+    if standalone_present != expected:
+        missing = sorted(expected - standalone_present)
+        unmanaged = sorted(standalone_present - expected)
         raise RuntimeError(f"Site asset inventory mismatch; missing={missing}, unmanaged={unmanaged}")
 
     records = []
-    for filename, (role, used_by) in ASSETS.items():
-        path = image_root / filename
+    for name, meta in ASSETS.items():
+        validate_category(meta["category"], name)
+        path = IMAGES_ROOT / meta["category"] / name
+        stem = Path(name).stem.upper().replace("-", "_")
         record = {
-            "id": f"RICE-SITE-{path.stem.upper().replace('-', '_')}",
-            "path": path.relative_to(ROOT).as_posix(),
-            "role": role,
-            "used_by": used_by,
+            "id": f"RICE-SITE-{stem}",
+            "path": rel(path),
+            "category": meta["category"],
+            "role": meta["role"],
+            "used_by": meta["used_by"],
             "bytes": path.stat().st_size,
             "sha256": sha256(path),
         }
@@ -69,17 +95,22 @@ def build() -> None:
                 record["format"] = image.format
         else:
             record["format"] = "MP4"
+        if "tags" in meta:
+            record["tags"] = meta["tags"]
+        if "caption" in meta:
+            record["caption"] = meta["caption"]
         records.append(record)
 
     inventory = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated": date.today().isoformat(),
-        "scope": "Standalone site media in images/; editorial collection assets are cataloged separately.",
-        "source_of_truth": "images/",
+        "scope": "Standalone site media in assets/images/<category>/; editorial collection assets are cataloged separately.",
+        "source_of_truth": "assets/images/",
+        "categories": category_block(),
         "assets": records,
     }
     OUTPUT.write_text(json.dumps(inventory, indent=2) + "\n", encoding="utf-8")
-    print(f"Built {len(records)} site assets at {OUTPUT.relative_to(ROOT).as_posix()}")
+    print(f"Built {len(records)} site assets at {rel(OUTPUT)}")
 
 
 if __name__ == "__main__":

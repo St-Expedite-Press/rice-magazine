@@ -49,26 +49,31 @@ RICE is framework-free and dependency-light. Preserve semantic HTML, keyboard fo
 | Shared visual system | `styles.css` |
 | Site behavior | `site.js` |
 | Asset browser | `asset-library.html`, `asset-library.css`, `asset-library.js` |
-| Approved generated-image masters | `images/editorial/city-field-notes/<city>/master/` |
-| Web image derivatives | `images/editorial/city-field-notes/<city>/web/` |
-| Thumbnail derivatives | `images/editorial/city-field-notes/<city>/thumb/` |
+| Served images (one web rendition each) | `assets/images/<category>/` |
+| Image masters | `assets/masters/<category>/` |
 | Asset metadata | `assets/catalog.json` |
 | Standalone site-media inventory | `assets/site-assets.json` |
+| Photo-slot map | `assets/photo-slots.json` |
+| Runtime random-image pools | `assets/image-pools.json` |
+| Category source of truth | `scripts/asset_categories.py`, `docs/ASSET_SCHEMA.md` |
 | Prompt manifest | `docs/city-image-prompts.json` |
 | Image doctrine | `docs/IMAGE_STYLE_GUIDE.md` |
-| Asset build/check logic | `scripts/build_asset_library.py`, `scripts/build_site_asset_inventory.py`, `scripts/check_assets.py` |
+| Asset build/check logic | `scripts/build_asset_library.py`, `scripts/build_site_asset_inventory.py`, `scripts/build_image_pools.py`, `scripts/check_assets.py` |
 
 Keep the implementation lightweight and dependency-free. Preserve restrained acid-yellow use, quiet reading-page texture, and the C86 × South × St. Expedite image grammar.
 
 ## Image pipeline
 
-Do not hand-edit files in `web/` or `thumb/`, or generated catalog measurements. Change the canonical master or prompt record, then rebuild:
+Images are categorized assets: served web renditions live in `assets/images/<category>/` (the only sub-directories are the five categories), masters in `assets/masters/<category>/`. There is one web rendition per image (no thumb tier). Do not hand-edit served renditions or generated catalog measurements. Change the master or prompt record, then rebuild:
 
 ```powershell
 python scripts/build_asset_library.py
 python scripts/build_site_asset_inventory.py
+python scripts/build_image_pools.py
 python scripts/check_assets.py
 ```
+
+Archive (and, later, photo) slots draw a random pool image per load via `image-pools.json` and `site.js`; slots bound to an article or element stay fixed. See `docs/PHOTO_SLOTS.md`.
 
 Generated archival images must remain labeled as visual reconstructions and must never be presented as authenticated historical records. Preserve prompt, provenance, accession, transformation, and licensing metadata.
 
