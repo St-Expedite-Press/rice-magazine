@@ -65,16 +65,74 @@ The design is intentionally lightweight and framework-free. It uses semantic HTM
 
 Additional image direction: [`docs/CITY_IMAGE_PROMPTS.md`](docs/CITY_IMAGE_PROMPTS.md) contains five tightly constrained image families for five Southern bohemian cities.
 
-Images are categorized assets: served web renditions live in `assets/images/<category>/` (the only sub-directories are the five categories — `archive`, `article`, `feature`, `photo`, `system`) and masters in `assets/masters/<category>/`. The editorial collection is managed through [`assets/catalog.json`](assets/catalog.json), standalone runtime media in [`assets/site-assets.json`](assets/site-assets.json), random-slot pools in [`assets/image-pools.json`](assets/image-pools.json), and slot bindings in [`assets/photo-slots.json`](assets/photo-slots.json). Editorial **works** (essays, fiction, poetry, archive) are modeled in [`assets/articles.json`](assets/articles.json), which `site.js` uses to build the search index.
+## Data model
 
-The category taxonomies and the shared `place` field are defined in [`scripts/asset_categories.py`](scripts/asset_categories.py) and documented in [`docs/ASSET_SCHEMA.md`](docs/ASSET_SCHEMA.md). Inventories are documented in [`assets/README.md`](assets/README.md), and the editorial collection is browsable at `asset-library.html`.
+RICE treats every image and every editorial work as a **typed, validated asset
+with a single source of truth**. The model has two classification axes, one shared
+geographic field, and a set of JSON inventories that the site reads at build time
+and at runtime. The canonical definitions live in
+[`scripts/asset_categories.py`](scripts/asset_categories.py); the full reference is
+[`docs/ASSET_SCHEMA.md`](docs/ASSET_SCHEMA.md).
+
+### Two taxonomies
+
+The word *category* means two different things depending on what is being classified,
+so the model keeps them as separate enumerations:
+
+| Axis | Applies to | Values | Answers |
+| --- | --- | --- | --- |
+| **Image category** (`CATEGORIES`) | every image | `archive`, `article`, `feature`, `photo`, `system` | *Where may this image be placed?* (which slot / pool) |
+| **Work category** (`ARTICLE_CATEGORIES`) | every article/work | `article`, `fiction`, `poetry`, `photo`, `archive` | *What kind of work is this?* (content type) |
+
+They share some labels (`article`, `photo`, `archive`) but are deliberately distinct:
+an image's category routes its placement, while a work's category names its content.
+
+### `place` — the shared field
+
+`place` is the one geographic field used on both sides. Images carry
+`place`/`place_slug` (formerly `city`/`city_slug`); works carry `place` (formerly the
+informal "parish"). Same name, one concept.
+
+### Inventories
+
+| File | Holds | Source |
+| --- | --- | --- |
+| [`assets/catalog.json`](assets/catalog.json) | Editorial image collection — accession id, title, `place`, `category`, role/family, orientation, rights, provenance, AI disclosure, prompt lineage, caption, tags, and `web`/`master` files with dimensions + SHA-256 | Generated from masters + prompt manifest |
+| [`assets/site-assets.json`](assets/site-assets.json) | Standalone runtime media (logo, textures, feature covers, ledger) — id, path, `category`, role, consumers, size/checksum, and `place`/caption/tags where relevant | Generated |
+| [`assets/image-pools.json`](assets/image-pools.json) | Runtime pools for randomizable categories (`archive`, `photo`): `src`, `alt`, `caption`, `tags`, `focal_point` | Generated from the two inventories |
+| [`assets/photo-slots.json`](assets/photo-slots.json) | Every rendered image slot — page, location, `category`, image, caption, and `random`/`pool` for shuffling slots | Hand-authored |
+| [`assets/articles.json`](assets/articles.json) | Editorial **works** — `id`, `title`, `category` (work type), `place`, `author`, `date`, `description`, `keywords`, `ref`, `href`, `hero` | Hand-authored |
+
+`articles.json` is the source of truth for works: `site.js` builds the search index
+from it rather than from a hardcoded list.
+
+### On-disk layout
+
+Images are organized **only by category** — the served web rendition of each image
+lives in its category folder, with originals kept out of the rendered set:
+
+```text
+assets/
+  images/   archive/ article/ feature/ photo/ system/   # one web rendition each
+  masters/  archive/ article/ _incoming/                 # originals, not referenced by the site
+```
+
+### Build & validate
+
+Masters and standalone files are the inputs; everything else is generated and checked:
 
 ```sh
-python scripts/build_asset_library.py
-python scripts/build_site_asset_inventory.py
-python scripts/build_image_pools.py
-python scripts/check_assets.py
+python scripts/build_asset_library.py        # masters -> catalog.json + web renditions
+python scripts/build_site_asset_inventory.py # standalone media -> site-assets.json
+python scripts/build_image_pools.py          # inventories -> image-pools.json
+python scripts/check_assets.py               # validate everything (see below)
 ```
+
+`check_assets.py` enforces the model end to end: known categories, no orphan served
+files, every slot's image matching its category, random slots pointing at a non-empty
+pool, and each work's category/required fields/`href`/`hero` resolving. Inventories are
+also documented in [`assets/README.md`](assets/README.md), and the editorial collection
+is browsable at `asset-library.html`.
 
 ## Local preview
 
